@@ -16,7 +16,7 @@ const Homepage = () =>{
 };
 
 const Div = styled.div`
-margin-block-start: 60px;
+margin-block-start: 120px;
 `;
 
 

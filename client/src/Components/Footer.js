@@ -21,15 +21,17 @@ const Footer = () =>{
 };
 
 const Wrapper = styled.div`
-width: 100%;
-height: 80px;
-background-color: pink;
+width: 90%;
 display: flex;
 flex-direction: row;
 justify-content: space-between;
 position: absolute;
 bottom: 0%;
-
+left: 0; 
+right: 0; 
+margin-left: auto; 
+margin-right: auto;
+padding: 10px;
 `;
 
 

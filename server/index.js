@@ -33,28 +33,26 @@ const {
 } = require('./Handlers')
 
 
-
-
-
 const PORT = 8000;
 
 express()
-    .use(function(req, res, next) {
-    res.header(
-        'Access-Control-Allow-Methods',
-        'OPTIONS, HEAD, GET, PUT, POST, DELETE'
-    );
-    res.header(
-        'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content-Type, Accept'
-    );
-    next();
-})
+//     .use(function(req, res, next) {
+//     res.header(
+//         'Access-Control-Allow-Methods',
+//         'OPTIONS, HEAD, GET, PUT, POST, DELETE'
+//     );
+//     res.header(
+//         'Access-Control-Allow-Headers',
+//         'Origin, X-Requested-With, Content-Type, Accept'
+//     );
+//     next();
+// })
 .use(morgan('tiny'))
-.use(express.static('./server/assets'))
+// .use(express.static('./server/assets'))
 .use(express.json())
-.use(express.urlencoded({ extended: false }))
-.use('/', express.static(__dirname + '/'))
+// .use(express.urlencoded({ extended: false }))
+// .use('/', express.static(__dirname + '/'))
+.disable('etag')
 
 //REST endpoints
 //test
@@ -65,7 +63,7 @@ express()
 
 //TEACHER ENDPOINTS
 //Add teacher
-.post('/teachers', addTeacher )
+.post('/add-teacher', addTeacher)
 //get all the teachers
 .get('/teachers', getTeachers )
 // get a specific teacher
@@ -78,7 +76,7 @@ express()
 
 //GROUPS ENDPOINTS
 //Create new group
-.post('/groups', addGroup )
+.post('/add-group', addGroup )
 //get all the groups
 .get('/groups', getGroups )
 // get a specific group
@@ -90,7 +88,7 @@ express()
 
 //STUDENTS ENDPOINTS
 //Add student
-.post('/students', addStudent )
+.post('/add-student', addStudent )
 //get all the students
 .get('/students', getStudents )
 // get a specific student
@@ -103,7 +101,7 @@ express()
 
 //HOMEWORKS ENDPOINTS
 // add a homework
-.post('/homeworks', addHomework )
+.post('/add-homework', addHomework )
 //get all homeworks
 .get('/homeworks', getHomeworks )
 //get a specific homework
@@ -115,7 +113,7 @@ express()
 
 //RESULTS ENDPOINTS
 // add a result
-.post('/results', addResult )
+.post('/add-result', addResult )
 //get all results
 .get('/results', getResults )
 //get a specific result

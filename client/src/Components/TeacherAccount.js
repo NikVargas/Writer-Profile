@@ -1,10 +1,11 @@
+import TextHelper from "./TextHelper";
 
 
 const TeacherAccount = () =>{
 
     return(
         <>
-        Hi! Teacher's name
+        <div>Avatar</div> Hi! Teacher's name
         <h1>My groups</h1>
         {/* need enpoint and handler to create, update and delete groups DB */}
         <button>Add group </button>
@@ -17,6 +18,7 @@ const TeacherAccount = () =>{
         <p>Text 1 </p>
         <p>Text 2 </p>
         <p>Text 3 </p>
+        <TextHelper/>
         </>
     )
 }

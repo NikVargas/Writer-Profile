@@ -8,7 +8,8 @@ const Homepage = () =>{
         <div>
             <Header />
             <Div>
-                I'm the homepage
+                I'm the homepage 
+                <button>More Info</button>
             </Div>
             <Footer />
         </div>

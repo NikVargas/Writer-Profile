@@ -12,11 +12,10 @@ const LogIn = () =>{
     return(
         <div>
             <HeaderPage>
-           
             <Link to={`/`}>
             <Img src={Logo}/>
         </Link>
-        <Link to={`/sign-in`}>
+        <Link to={`/signin`}>
             <div>CREATE ACCOUNT</div>
         </Link>
             </HeaderPage>
@@ -27,10 +26,8 @@ const LogIn = () =>{
             <input placeholder="email@myemail.com" required></input>
             <label>Password</label>
             <input placeholder="Password" required></input>
-            <Link to={'/teacher-name'}> 
             <button> LOG IN </button>
             <p>Forgot your password?</p>
-            </Link>
         </Form> 
         </Section>
         <Footer/>

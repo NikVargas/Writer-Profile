@@ -19,14 +19,14 @@ const UserProvider = ({children}) =>{
         });
     }, []);
 
-    useEffect(()=>{
-        const user = window.sessionStorage.getItem("email") 
-        console.log(typeof user)
-        if (user){
-            setCurrentUser(JSON.parse(user))
-            setLogIn(true)
-        }
-    }, []);
+    // useEffect(()=>{
+    //     const user = window.sessionStorage.getItem("email") 
+    //     console.log(typeof user)
+    //     if (user){
+    //         setCurrentUser(JSON.parse(user))
+    //         setLogIn(true)
+    //     }
+    // }, []);
 
 
     return(

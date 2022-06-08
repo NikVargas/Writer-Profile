@@ -17,7 +17,7 @@ useEffect(() => {
         .then((res) => res.json())
         .then((data) => {
         setTeacher(data.data)
-        console.log(data)
+        // console.log(data)
         });
 }, [teacherId]);
 

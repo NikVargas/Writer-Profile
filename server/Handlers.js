@@ -52,18 +52,21 @@ const getTeacherByEmail = async (req,res) =>{
         const client = new MongoClient(MONGO_URI, options);
         await client.connect();
         const db = client.db("Writer_Profile");
-        const teacher = await db.collection("Teachers").findOne({ email: req.body.email});
-        !teacher ? res.status(400).json({
+        const { email } = req.query;
+        const isUser = await db.collection("Teachers").findOne({ email });
+        isUser ? res.status(200).json({
+            status: 200,
+            data: isUser,
+            message: "Welcome back!"
+        }) 
+        : res.status(400).json({
             status: 400,
             message: "User don't exist. Please create an account."
-        }) : res.status(200).json({
-            status: 200,
-            data: teacher
         })
         client.close()
     } catch (err) {
         console.log(err);
-      }
+    }
 }
 
 const getTeacherById = async (req,res) =>{

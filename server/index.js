@@ -58,7 +58,7 @@ express()
 // get a specific teacher
 .get('/teachers/:_id', getTeacherById )
 
-.get('/teachers/:_id', getTeacherByEmail )
+.get('/teacher/login', getTeacherByEmail )
 //Update teacher
 .patch('/teachers/:_id', updateTeacherById )
 // Delete specific teacher

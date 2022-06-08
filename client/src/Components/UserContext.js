@@ -14,7 +14,6 @@ const UserProvider = ({children}) =>{
         fetch("/teachers")
         .then((res) => res.json())
         .then((data) => {
-            console.log(data.data)
             setUsers(data);
         });
     }, []);

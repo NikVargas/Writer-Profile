@@ -2,12 +2,16 @@ import Header from "./Header";
 import Footer from "./Footer";
 import styled from "styled-components";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [errorMsg, setErrorMsg] = useState("");
+    const navigate = useNavigate();
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -24,7 +28,11 @@ const SignIn = () => {
         })
         .then((res) => res.json())
         .then((data) => {
-            console.log("Sign In:", data);
+            if (data.status === 200){
+                navigate("/teacher-profile");
+            } else {
+                setErrorMsg("Create account unsuccessful, please contact us.")
+            }
         });
     };
 
@@ -61,7 +69,7 @@ const SignIn = () => {
             type="password"
             required
             />
-
+             <div>{errorMsg}</div>
             <button type="submit">Create account</button>
         </Form>
         <Footer />

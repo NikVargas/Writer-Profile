@@ -11,23 +11,28 @@ const options = {
 };
 
 const addTeacher = async (req, res) => {
-  // try {
-  //   const client = new MongoClient(MONGO_URI, options);
-  //   await client.connect();
-  //   const db = client.db("Writer_Profile");
-  //   const alreadyUser = await db.collection("Teachers").findOne({ email: req.body.email });
-  //   alreadyUser ? res.status(400).json({
-  //       status: 400,
-  //       message: "This email is already associated to an user."
-  //   }) : await db.collection("Teachers").insertOne({ firstName : req.body.firstName, });
-  //       res.status(200).json({
-  //       status: 200,
-  //       message: "Congratulations! Your count was created.",
-  //   })
-  //   client.close();
-  // } catch (err) {
-  //   console.log(err);
-  // }
+try {
+    const client = new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("Writer_Profile");
+    const alreadyUser = await db.collection("Teachers").findOne({ email: req.body.email });
+    alreadyUser ? res.status(400).json({
+        status: 400,
+        message: "This email is already associated to an user."
+    }) : await db.collection("Teachers").insertOne({ 
+        firstName : req.body.firstName, 
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password
+    });
+        res.status(200).json({
+        status: 200,
+        message: "Congratulations! Your count was created.",
+    })
+    client.close();
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 const getTeachers = async (req,res) =>{
@@ -36,9 +41,9 @@ const getTeachers = async (req,res) =>{
     const db = client.db("Writer_Profile");
     const teachers = await db.collection("Teachers").find().toArray();
     res.status(200).json({
-         status: 200,
-         data: teachers
-     });
+        status: 200,
+        data: teachers
+    });
 }
 
 const getTeacherById = async (req,res) =>{

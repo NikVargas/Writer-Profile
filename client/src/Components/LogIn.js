@@ -15,7 +15,7 @@ const LogIn = () =>{
             <Link to={`/`}>
             <Img src={Logo}/>
         </Link>
-        <Link to={`/signin`}>
+        <Link to={`/sign-in`}>
             <div>CREATE ACCOUNT</div>
         </Link>
             </HeaderPage>

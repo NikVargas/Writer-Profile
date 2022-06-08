@@ -46,8 +46,23 @@ const getTeachers = async (req,res) =>{
     });
 }
 
-const getTeacherById = async (req,res) =>{
-    
+const getTeacherByEmail = async (req,res) =>{
+    try {
+        const client = new MongoClient(MONGO_URI, options);
+        await client.connect();
+        const db = client.db("Writer_Profile");
+        const teacher = await db.collection("Teachers").findOne({ email: req.body.email });
+        !teacher ? res.status(400).json({
+            status: 400,
+            message: "This email is already associated to an user."
+        }) : res.status(200).json({
+            status: 200,
+            message: teacher
+        })
+        client.close()
+    } catch (err) {
+        console.log(err);
+      }
 }
 
 const updateTeacherById = async (req,res) =>{
@@ -59,7 +74,21 @@ const deleteTeacherById = async (req,res) =>{
 }
 
 const addGroup = async (req,res) =>{
-
+    try {
+        const client = new MongoClient(MONGO_URI, options);
+        await client.connect();
+        const db = client.db("Writer_Profile");
+        await db.collection("Groups").insertOne({ 
+            groupName: req.body.groupName
+        });
+            res.status(200).json({
+            status: 200,
+            message: "Your group was created.",
+        })
+        client.close();
+      } catch (err) {
+        console.log(err);
+      }
 }
 
 const getGroups = async (req,res) =>{
@@ -146,7 +175,7 @@ const deleteResultById = async (req,res) =>{
 module.exports = {
     addTeacher,
     getTeachers,
-    getTeacherById,
+    getTeacherByEmail,
     updateTeacherById,
     deleteTeacherById,
     addGroup,

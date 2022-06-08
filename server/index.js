@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const {
     addTeacher,
     getTeachers,
+    getTeacherById,
     getTeacherByEmail,
     updateTeacherById,
     deleteTeacherById,
@@ -55,11 +56,13 @@ express()
 //get all the teachers
 .get('/teachers', getTeachers )
 // get a specific teacher
-.get('/teachers/:name', getTeacherByEmail )
+.get('/teachers/:_id', getTeacherById )
+
+.get('/teachers/:_id', getTeacherByEmail )
 //Update teacher
-.patch('/teachers/:name', updateTeacherById )
+.patch('/teachers/:_id', updateTeacherById )
 // Delete specific teacher
-.delete('/teachers/:id', deleteTeacherById )
+.delete('/teachers/:_id', deleteTeacherById )
 
 
 //GROUPS ENDPOINTS

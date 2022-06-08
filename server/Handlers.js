@@ -1,6 +1,6 @@
 "use strict";
 
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 
 require("dotenv").config();
 const { MONGO_URI } = process.env;
@@ -15,19 +15,20 @@ try {
     const client = new MongoClient(MONGO_URI, options);
     await client.connect();
     const db = client.db("Writer_Profile");
+    const newTeacher = {
+        firstName : req.body.firstName, 
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password}
     const alreadyUser = await db.collection("Teachers").findOne({ email: req.body.email });
     alreadyUser ? res.status(400).json({
         status: 400,
         message: "This email is already associated to an user."
-    }) : await db.collection("Teachers").insertOne({ 
-        firstName : req.body.firstName, 
-        lastName: req.body.lastName,
-        email: req.body.email,
-        password: req.body.password
-    });
+    }) : await db.collection("Teachers").insertOne(newTeacher);
         res.status(200).json({
         status: 200,
-        message: "Congratulations! Your count was created.",
+        data: newTeacher,
+        message: "Congratulations! Your account was created.",
     })
     client.close();
   } catch (err) {
@@ -51,18 +52,39 @@ const getTeacherByEmail = async (req,res) =>{
         const client = new MongoClient(MONGO_URI, options);
         await client.connect();
         const db = client.db("Writer_Profile");
-        const teacher = await db.collection("Teachers").findOne({ email: req.body.email });
+        const teacher = await db.collection("Teachers").findOne({ email: req.body.email});
         !teacher ? res.status(400).json({
             status: 400,
-            message: "This email is already associated to an user."
+            message: "User don't exist. Please create an account."
         }) : res.status(200).json({
             status: 200,
-            message: teacher
+            data: teacher
         })
         client.close()
     } catch (err) {
         console.log(err);
       }
+}
+
+const getTeacherById = async (req,res) =>{
+    try {
+        const client = new MongoClient(MONGO_URI, options);
+        await client.connect();
+         const teacherId = req.params._id;
+         const db = client.db("Writer_Profile");
+        const teacher = await db.collection("Teachers").findOne( {_id: ObjectId(teacherId) } );
+        !teacher ? res.status(400).json({
+            status: 400,
+            message: "This email is already associated to an user."
+        }) : res.status(200).json({
+            status: 200,
+            teacherId,
+            data: teacher,
+        })
+        client.close()
+    } catch (err) {
+        console.log(err);
+      } 
 }
 
 const updateTeacherById = async (req,res) =>{
@@ -176,6 +198,7 @@ module.exports = {
     addTeacher,
     getTeachers,
     getTeacherByEmail,
+    getTeacherById,
     updateTeacherById,
     deleteTeacherById,
     addGroup,

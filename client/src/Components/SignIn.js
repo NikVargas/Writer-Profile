@@ -13,30 +13,34 @@ const SignIn = () => {
     const [lastName, setLastName] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [currentTeacherId, setCurrentTeacherId] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
     const navigate = useNavigate();
 
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        fetch("/add-teacher", {
+      e.preventDefault();
+      fetch("/add-teacher", {
         body: JSON.stringify({
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
         }),
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
+          "Content-Type": "application/json",
         },
-        })
+      })
         .then((res) => res.json())
         .then((data) => {
-            if (data.status === 200){
-                navigate("/teacher-profile");
-            } else {
-                setErrorMsg("Create account unsuccessful, please contact us.")
-            }
+          console.log(data);
+          if (data.status === 200) {
+            setCurrentTeacherId(data.data._id);
+            // localStorage.setItem("id", JSON.stringify(currentTeacherId));
+            data.data._id && navigate(`/teachers/${data.data._id}`);
+          } else {
+            setErrorMsg("Create account unsuccessful, please contact us.");
+          }
         });
     };
 
@@ -61,7 +65,7 @@ const SignIn = () => {
             />
             <label>Email address</label>
             <input
-            value={email}
+             value={email}
             onChange={(e) => setEmail(e.target.value)}
             type="text"
             required

@@ -25,7 +25,7 @@ const LogIn = () =>{
         
     }
     return(
-        <div>
+        <Wrapper>
             <HeaderPage>
             <Link to={`/`}>
             <Img src={Logo}/>
@@ -53,11 +53,17 @@ const LogIn = () =>{
             <p>Forgot your password?</p>
         </Form> 
         </Section>
-        <Footer/>
-        </div>
+        </Wrapper>
     )
 }
 
+
+
+const Wrapper = styled.div`
+height: 100vh;
+
+
+`
 
 const HeaderPage = styled.div`
 top: 0;

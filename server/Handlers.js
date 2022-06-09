@@ -10,6 +10,8 @@ const options = {
     useUnifiedTopology: true,
 };
 
+
+//TEACHERS
 const addTeacher = async (req, res) => {
 try {
     const client = new MongoClient(MONGO_URI, options);
@@ -75,8 +77,8 @@ const getTeacherById = async (req,res) =>{
     try {
         const client = new MongoClient(MONGO_URI, options);
         await client.connect();
-         const teacherId = req.params._id;
-         const db = client.db("Writer_Profile");
+        const teacherId = req.params._id;
+        const db = client.db("Writer_Profile");
         const teacher = await db.collection("Teachers").findOne( {_id: ObjectId(teacherId) } );
         !teacher ? res.status(400).json({
             status: 400,
@@ -89,7 +91,7 @@ const getTeacherById = async (req,res) =>{
         client.close()
     } catch (err) {
         console.log(err);
-      } 
+    } 
 }
 
 const updateTeacherById = async (req,res) =>{
@@ -99,25 +101,28 @@ const updateTeacherById = async (req,res) =>{
 const deleteTeacherById = async (req,res) =>{
     
 }
-
+//GROUPS
 const addGroup = async (req,res) =>{
     try {
-       const { groupName, teacherId} = req.body
+        const { groupName, teacherId } = req.body
         const client = new MongoClient(MONGO_URI, options);
         await client.connect();
         const db = client.db("Writer_Profile");
-        const newGroup = await db.collection("Groups").insertOne({ groupName: req.body.groupName
-        });
-        await db.collection("Teachers").updateOne({ _id: ObjectId(teacherId)}, { $push: { groups: newGroup.insertedId } });
+        const newGroup ={
+            groupName: req.body.groupName,
+            students: [],
+        }
+        await db.collection("Groups").insertOne(newGroup);
+        await db.collection("Teachers").updateOne({ _id: ObjectId(teacherId)}, { $push: { groups: newGroup._id } });
             res.status(200).json({
             status: 200,
             data: newGroup, 
             message: "Your group was created.",
         })
         client.close();
-      } catch (err) {
-        console.log(err);
-      }
+        } catch (err) {
+            console.log(err);
+        }
 }
 
 const getGroups = async (req,res) =>{
@@ -135,9 +140,29 @@ const updateGroupById = async (req,res) =>{
 const deleteGroupById = async (req,res) =>{
     
 }
-
+//STUDENTS
 const addStudent = async (req,res) =>{
-
+    try {
+        const client = new MongoClient(MONGO_URI, options);
+        await client.connect();
+        const db = client.db("Writer_Profile");
+        const student ={
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            texts: [],
+        }
+        const newStudent = await db.collection("Students").insertOne(student);
+        // await db.collection("Groups").updateOne({ _id: ObjectId(teacherId)}, { $push: { groups: newGroup.insertedId } });
+            res.status(200).json({
+            status: 200,
+            data: newStudent, 
+            message: "Student added.",
+        })
+        client.close();
+        } catch (err) {
+            console.log(err);
+        }
 }
 
 const getStudents = async (req,res) =>{
@@ -156,6 +181,7 @@ const deleteStudentById = async (req,res) =>{
     
 }
 
+//texts
 const addHomework = async (req,res) =>{
 
 }

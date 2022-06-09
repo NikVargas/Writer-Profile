@@ -1,12 +1,15 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 
 const AddGroup = () =>{
 
     let teacherId = useParams().id;
     const [groupName, setGroupName]= useState();
+    const [group, setGroup]= useState();
+    const [ errorMsg, setErrorMsg]= useState();
+    const navigate = useNavigate();
 
 const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,13 +25,15 @@ const handleSubmit = (e) => {
     })
         .then((res) => res.json())
         .then((data) => {
-        console.log(data);
+            if (data.status === 200) {
+            setGroup(data.data)
+            data.data._id && navigate(`/my-groups/${data.data._id}`)
+            console.log(data);
+            } else {
+                setErrorMsg("Error")
+            }
         });
     };
-
-
-
-
     return(
         <>
         <div>Form to Add a group </div>
@@ -38,6 +43,7 @@ const handleSubmit = (e) => {
             onChange={(e)=> setGroupName(e.target.value)}
             type="text"
             placeholder="Group name"></input>
+           
             <button type="submit">submit</button>
         </Form>
         </>

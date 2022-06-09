@@ -9,6 +9,7 @@ import Store from "./Store";
 import TeacherAccount from "./TeacherAccount";
 import Footer from "./Footer";
 import styled from "styled-components";
+import GroupPage from "./GroupPage";
 
 
 
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/blog" element={<Blog />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/teachers/:id" element={<TeacherAccount />} />
+          <Route path="/my-groups/:id" element={<GroupPage />} />
         </Routes>
       </BrowserRouter>
       <Footer/>
@@ -35,7 +37,6 @@ const App = () => {
 
 
 const Div = styled.div`
-
 height: 100vh;
 `;
 export default App;

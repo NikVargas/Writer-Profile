@@ -35,11 +35,12 @@ flex-direction: row;
 justify-content: space-between;
 position: absolute;
 left: 0; 
-  right: 0; 
-  margin-left: auto; 
-  margin-right: auto; 
+right: 0; 
+margin-left: auto; 
+margin-right: auto; 
 top: 0%;
 padding: 20px;
+z-index: 2;
 `;
 
 const Img = styled.img`

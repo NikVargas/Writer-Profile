@@ -10,7 +10,6 @@ const Homepage = () =>{
             <Header />
                 <Div>
                 <Text>Help your students during the self-correction of texts.<Button>More Info</Button></Text>
-                
                 <Img src={notebook_img}/> 
             </Div>
         </Wrapper>
@@ -18,23 +17,21 @@ const Homepage = () =>{
 };
 
 const Wrapper = styled.div`
-
- /* height: 100px;
-  background-color: red;
-  background-image:
-    linear-gradient(
-      red, #f06d06
-    ); */
-    /* background-image: linear-gradient(to bottom, transparent 50%, midnightblue 50%);
+z-index: 0;
+background-image:
+  linear-gradient(
+    red, #f06d06
+  );
+  background-image: linear-gradient(to bottom, transparent 50%, midnightblue 50%);
 
 :after {
   content: "";
   display: block;
   min-height: 98vh;
-} */
+} 
 `
 const Div = styled.div`
-/* width: 90%;
+width: 90%;
 padding: 50px;
 display: flex;
 justify-content: center;
@@ -42,7 +39,7 @@ align-items: center;
 
 position: sticky;
 mix-blend-mode: difference;
-min-height: 98vh; */
+min-height: 98vh; 
 `;
 
 const Img = styled.img`
@@ -62,7 +59,6 @@ top: 40px;
 const Text = styled.div`
 font-size: 45px;
 font-weight: bold;
-
 z-index: 2;
 `;
 

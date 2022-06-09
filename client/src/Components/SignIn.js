@@ -1,13 +1,12 @@
 import Header from "./Header";
-import Footer from "./Footer";
 import styled from "styled-components";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "./UserContext";
+
 
 const SignIn = () => {
 
-    const { logIn, setCurrentUser, setLogIn } = useContext(UserContext)
+    
 
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
@@ -80,7 +79,6 @@ const SignIn = () => {
              <div>{errorMsg}</div>
             <button type="submit">Create account</button>
         </Form>
-        <Footer />
         </>
     );
 };

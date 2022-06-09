@@ -1,15 +1,22 @@
 import { useContext, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import TextHelper from "./TextHelper";
 import Header from "./Header"
 import styled from "styled-components";
-
+import AddGroup from "./AddGroup";
 
 const TeacherAccount = () =>{
     
+    const navigate = useNavigate();
     // const [teacherId, setTeacherId] = useState();
     const [teacher, setTeacher] = useState();
-    let teacherId = useParams().id
+    const [addGroupForm, setAddGroupForm] = useState(false);
+    let teacherId = useParams().id;
+
+
+    const addGroupsForm = ()=>{
+        setAddGroupForm(!addGroupForm)
+    }
     
 useEffect(() => {
     console.log(teacherId)
@@ -20,6 +27,7 @@ useEffect(() => {
         // console.log(data)
         });
 }, [teacherId]);
+
 
 //     useEffect(() => {
 //     setTeacherId(JSON.parse(localStorage.getItem("id")));
@@ -54,7 +62,11 @@ useEffect(() => {
          {teacher ? <div>Hi! {teacher.firstName} </div> : <p>Hi!</p>}  
         <h1>My groups</h1>
         {/* need enpoint and handler to create, update and delete groups DB */}
-        <button>Add group </button>
+        <button onClick={addGroupsForm}>Add group </button>
+        {addGroupForm && (
+           <AddGroup/ >
+        )}
+        
         <p>Group 1</p>
         <p>Group 2</p>
         <p>Group 3</p>

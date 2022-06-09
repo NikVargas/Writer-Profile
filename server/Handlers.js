@@ -100,14 +100,16 @@ const deleteTeacherById = async (req,res) =>{
 
 const addGroup = async (req,res) =>{
     try {
+       const { groupName } = req.body
         const client = new MongoClient(MONGO_URI, options);
         await client.connect();
         const db = client.db("Writer_Profile");
-        await db.collection("Groups").insertOne({ 
-            groupName: req.body.groupName
+        const teacherId = req.params._id;
+        const newGroup = await db.collection("Groups").insertOne({ groupName: req.body.groupName
         });
             res.status(200).json({
             status: 200,
+            data: newGroup, 
             message: "Your group was created.",
         })
         client.close();

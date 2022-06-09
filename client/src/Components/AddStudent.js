@@ -3,12 +3,13 @@ import styled from "styled-components";
 import { useParams, useNavigate } from "react-router-dom";
 
 const AddStudent = () =>{
-
+let navigate = useNavigate();
 const groupId = useParams().id;
-const [teacherId, setTeacherId ]= useState();
+// const [teacherId, setTeacherId ]= useState();
 const [firstName, setFirstName]= useState();
 const [lastName, setLastName]= useState();
 const [email, setEmail]= useState();
+const teacherId = localStorage.getItem("teacherId")
 
 const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,6 +19,7 @@ const handleSubmit = (e) => {
         lastName: lastName,
         email: email,
         groupId: groupId,
+        teacherId: teacherId
         }),
         method: "POST",
         headers: {
@@ -26,9 +28,10 @@ const handleSubmit = (e) => {
     })
         .then((res) => res.json())
         .then((data) => {
-            if(data.status === 200){
+            
+               
             console.log("addstudent test:", data); 
-            }
+            
             
   
         });

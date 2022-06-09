@@ -81,13 +81,14 @@ const getTeacherById = async (req,res) =>{
         const client = new MongoClient(MONGO_URI, options);
         await client.connect();
         const teacherId = req.params._id;
+        console.log("teacher",teacherId)
         const db = client.db("Writer_Profile");
         const teacher = await db.collection("Teachers").findOne({
             _id: ObjectId(teacherId) 
         });
         !teacher ? res.status(400).json({
             status: 400,
-            message: "This email is already associated to an user."
+            message: "Not found."
         }) : res.status(200).json({
             status: 200,
             teacherId,
@@ -135,7 +136,16 @@ const addGroup = async (req,res) =>{
 }
 
 const getGroups = async (req,res) =>{
-    
+    const { teacherId } = req.query
+    console.log("teacherId groups", teacherId)
+    const client = new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("Writer_Profile");
+    const groups = await db.collection("Groups").find({teacherId}).toArray();
+    res.status(200).json({
+        status: 200,
+        data: groups
+    });
 }
 
 const getGroupById = async (req,res) =>{
@@ -163,10 +173,12 @@ const addStudent = async (req,res) =>{
             group: groupId,
             teacher: teacherId,
             texts: [],
+            results:[]
         }
         const newStudent = await db.collection("Students").insertOne(student);
         await db.collection("Groups").updateOne({ _id: ObjectId(groupId)}, { $push:{ students: newStudent.insertedId} })
-          newStudent ?  
+
+        newStudent ?  
           res.status(200).json({
             status: 200,
             data: student, 

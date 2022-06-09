@@ -26,7 +26,7 @@ const App = () => {
           <Route path="/help-center" element={<HelpCenter />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/login" element={<LogIn />} />
-          <Route path="/teachers/:id" element={<TeacherAccount />} />
+          <Route path="/teachers/:teacherId" element={<TeacherAccount />} />
           <Route path="/my-groups/:id" element={<GroupPage />} />
         </Routes>
       </BrowserRouter>

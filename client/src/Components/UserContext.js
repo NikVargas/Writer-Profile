@@ -1,5 +1,5 @@
 import { useState, useEffect, createContext } from "react";
-
+import { useParams } from "react-router-dom";
 
 export const UserContext = createContext(null);
 
@@ -7,27 +7,21 @@ const UserProvider = ({children}) =>{
     const [users, setUsers] = useState([]);
     const [status, setStatus] = useState();
     const [errorMessage, setErrorMessage] = useState();
-    const [currentUser, setCurrentUser] = useState()
+    const [currentTeacher, setCurrentTeacher] = useState()
     const [logIn, setLogIn] = useState(false)
-
+    
+    let teacherId = useParams().id;
+        console.log(teacherId)
     useEffect(() => {
-        fetch("/teachers")
+        fetch(`/teachers/${teacherId}`)
         .then((res) => res.json())
         .then((data) => {
-            setUsers(data);
+            setCurrentTeacher(data);
+            console.log(data);
         });
     }, []);
-
-    // useEffect(()=>{
-    //  const user = window.sessionStorage.getItem("name") 
-    //  console.log(typeof user)
-    //   if (user){
-    //      setCurrentUser(JSON.parse(user))
-    //       setLogIn(true)
-    //   }
-    // }, []);
-
-
+console.log(currentTeacher)
+ 
     return(
         <UserContext.Provider
         value={{
@@ -37,8 +31,8 @@ const UserProvider = ({children}) =>{
             setStatus,
             errorMessage,
             setErrorMessage,
-            currentUser,
-            setCurrentUser,
+            currentTeacher,
+            setCurrentTeacher,
             logIn,
             setLogIn,
         }}

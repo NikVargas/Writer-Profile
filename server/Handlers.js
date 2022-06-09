@@ -22,9 +22,12 @@ try {
         lastName: req.body.lastName,
         email: req.body.email,
         password: req.body.password,
-        groups: []
+        groups: [],
+        students: []
     }
-    const alreadyUser = await db.collection("Teachers").findOne({ email: req.body.email });
+    const alreadyUser = await db.collection("Teachers").findOne({ 
+        email: req.body.email 
+    });
     alreadyUser ? res.status(400).json({
         status: 400,
         message: "This email is already associated to an user."
@@ -79,7 +82,9 @@ const getTeacherById = async (req,res) =>{
         await client.connect();
         const teacherId = req.params._id;
         const db = client.db("Writer_Profile");
-        const teacher = await db.collection("Teachers").findOne( {_id: ObjectId(teacherId) } );
+        const teacher = await db.collection("Teachers").findOne({
+            _id: ObjectId(teacherId) 
+        });
         !teacher ? res.status(400).json({
             status: 400,
             message: "This email is already associated to an user."
@@ -104,16 +109,20 @@ const deleteTeacherById = async (req,res) =>{
 //GROUPS
 const addGroup = async (req,res) =>{
     try {
-        const { groupName, teacherId } = req.body
+        const { teacherId } = req.body
         const client = new MongoClient(MONGO_URI, options);
         await client.connect();
         const db = client.db("Writer_Profile");
         const newGroup ={
             groupName: req.body.groupName,
+            teacherId: req.body.teacherId, 
             students: [],
         }
         await db.collection("Groups").insertOne(newGroup);
-        await db.collection("Teachers").updateOne({ _id: ObjectId(teacherId)}, { $push: { groups: newGroup._id } });
+        await db.collection("Teachers").updateOne({ 
+            _id: ObjectId(teacherId)}, 
+            { $push: { groups: newGroup._id } 
+        });
             res.status(200).json({
             status: 200,
             data: newGroup, 
@@ -143,6 +152,7 @@ const deleteGroupById = async (req,res) =>{
 //STUDENTS
 const addStudent = async (req,res) =>{
     try {
+        const { groupId, teacherId } = req.body
         const client = new MongoClient(MONGO_URI, options);
         await client.connect();
         const db = client.db("Writer_Profile");
@@ -150,14 +160,20 @@ const addStudent = async (req,res) =>{
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
+            group: groupId,
+            teacher: teacherId,
             texts: [],
         }
         const newStudent = await db.collection("Students").insertOne(student);
-        // await db.collection("Groups").updateOne({ _id: ObjectId(teacherId)}, { $push: { groups: newGroup.insertedId } });
-            res.status(200).json({
+        await db.collection("Groups").updateOne({ _id: ObjectId(groupId)}, { $push:{ students: newStudent.insertedId} })
+          newStudent ?  
+          res.status(200).json({
             status: 200,
-            data: newStudent, 
+            data: student, 
             message: "Student added.",
+        }) : res.status(400).json({
+            status: 400,
+            message: "Error"
         })
         client.close();
         } catch (err) {

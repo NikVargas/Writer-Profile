@@ -9,6 +9,7 @@ const AddGroup = () =>{
     const [groupName, setGroupName]= useState();
     const [group, setGroup]= useState();
     const [ errorMsg, setErrorMsg]= useState();
+    const [ myTeacherId, setMyTeacherId]= useState();
     const navigate = useNavigate();
 
 const handleSubmit = (e) => {
@@ -27,6 +28,7 @@ const handleSubmit = (e) => {
         .then((data) => {
             if (data.status === 200) {
             setGroup(data.data)
+            setMyTeacherId(data.data.teacherId)
             data.data._id && navigate(`/my-groups/${data.data._id}`)
             console.log(data);
             } else {

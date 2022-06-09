@@ -1,7 +1,11 @@
 import { useState } from "react";
+import styled from "styled-components";
+import { useParams, useNavigate } from "react-router-dom";
 
 const AddStudent = () =>{
 
+const groupId = useParams().id;
+const [teacherId, setTeacherId ]= useState();
 const [firstName, setFirstName]= useState();
 const [lastName, setLastName]= useState();
 const [email, setEmail]= useState();
@@ -12,7 +16,8 @@ const handleSubmit = (e) => {
         body: JSON.stringify({
         firstName: firstName,
         lastName: lastName,
-        email: email
+        email: email,
+        groupId: groupId,
         }),
         method: "POST",
         headers: {
@@ -21,7 +26,11 @@ const handleSubmit = (e) => {
     })
         .then((res) => res.json())
         .then((data) => {
-        console.log(data);
+            if(data.status === 200){
+            console.log("addstudent test:", data); 
+            }
+            
+  
         });
     };
 

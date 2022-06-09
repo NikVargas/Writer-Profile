@@ -11,7 +11,7 @@ const GroupPage = () =>{
     const [student, setStudent] = useState();
     const [addStudentForm, setAddStudentForm] = useState(false);
     let groupId = useParams().id;
-  
+
     const addStudentsForm = () => {
       setAddStudentForm(!addStudentForm);
     };
@@ -23,6 +23,7 @@ const GroupPage = () =>{
                 <div>Group Name</div>
                 <button onClick={addStudentsForm}>Add Student</button>
                 {addStudentForm && <AddStudent/>}
+                <div>Display group's students</div>
             </Container>
         </div>
     )

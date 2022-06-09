@@ -7,13 +7,15 @@ import LogIn from "./LogIn";
 import HelpCenter from "./Help-Center";
 import Store from "./Store";
 import TeacherAccount from "./TeacherAccount";
+import Footer from "./Footer";
+import styled from "styled-components";
 
 
 
 const App = () => {
 
   return (
-    <div>
+    <Div>
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
@@ -26,8 +28,14 @@ const App = () => {
           <Route path="/teachers/:id" element={<TeacherAccount />} />
         </Routes>
       </BrowserRouter>
-    </div>
+      <Footer/>
+    </Div>
   );
 }
 
+
+const Div = styled.div`
+
+height: 100vh;
+`;
 export default App;

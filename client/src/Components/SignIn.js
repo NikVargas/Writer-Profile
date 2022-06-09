@@ -20,7 +20,7 @@ const SignIn = () => {
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      fetch("/teachers/:_id", {
+      fetch("/add-teacher", {
         body: JSON.stringify({
           firstName: firstName,
           lastName: lastName,

@@ -19,7 +19,9 @@ try {
         firstName : req.body.firstName, 
         lastName: req.body.lastName,
         email: req.body.email,
-        password: req.body.password}
+        password: req.body.password,
+        groups: []
+    }
     const alreadyUser = await db.collection("Teachers").findOne({ email: req.body.email });
     alreadyUser ? res.status(400).json({
         status: 400,
@@ -100,13 +102,13 @@ const deleteTeacherById = async (req,res) =>{
 
 const addGroup = async (req,res) =>{
     try {
-       const { groupName } = req.body
+       const { groupName, teacherId} = req.body
         const client = new MongoClient(MONGO_URI, options);
         await client.connect();
         const db = client.db("Writer_Profile");
-        const teacherId = req.params._id;
         const newGroup = await db.collection("Groups").insertOne({ groupName: req.body.groupName
         });
+        await db.collection("Teachers").updateOne({ _id: ObjectId(teacherId)}, { $push: { groups: newGroup.insertedId } });
             res.status(200).json({
             status: 200,
             data: newGroup, 

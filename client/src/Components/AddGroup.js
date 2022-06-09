@@ -1,16 +1,18 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
 
 
 const AddGroup = () =>{
 
-
+    let teacherId = useParams().id;
     const [groupName, setGroupName]= useState();
 
 const handleSubmit = (e) => {
     e.preventDefault();
     fetch("/add-group", {
         body: JSON.stringify({
+        teacherId: teacherId,
         groupName: groupName
         }),
         method: "POST",

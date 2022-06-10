@@ -1,6 +1,6 @@
 import {  useState, useEffect } from "react";
 import {  useParams } from "react-router-dom";
-import TextHelper from "./TextHelper";
+import TextHelper from "./TextDoc";
 import Header from "./Header"
 import styled from "styled-components";
 import AddGroup from "./AddGroup";

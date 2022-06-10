@@ -11,12 +11,9 @@ import Footer from "./Footer";
 import styled from "styled-components";
 import GroupPage from "./GroupPage";
 import StudentPage from "./StudentPage";
-import TextHelper from "./TextHelper";
-
-
+import TextDoc from "./TextDoc";
 
 const App = () => {
-
   return (
     <Div>
       <GlobalStyles />
@@ -31,16 +28,15 @@ const App = () => {
           <Route path="/teachers/:teacherId" element={<TeacherAccount />} />
           <Route path="/groups/:groupId" element={<GroupPage />} />
           <Route path="/students/:studentId" element={<StudentPage />} />
-          <Route path="/:textId" element={<TextHelper />} />
+          <Route path="/:textId" element={<TextDoc />} />
         </Routes>
       </BrowserRouter>
-      <Footer/>
+      <Footer />
     </Div>
   );
-}
-
+};
 
 const Div = styled.div`
-height: 100vh;
+  height: 100vh;
 `;
 export default App;

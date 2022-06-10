@@ -1,11 +1,5 @@
+const Store = () => {
+  return <>Store</>;
+};
 
-
-const Store = () =>{
-
-    return(
-        <>Store</>
-    )
-}
-
-
-export default Store
+export default Store;

@@ -37,6 +37,6 @@ const Texts = () => {
 };
 
 const Div = styled.div`
-padding: 10px;
+  padding: 10px;
 `;
 export default Texts;

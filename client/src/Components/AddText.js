@@ -3,12 +3,11 @@ import styled from "styled-components";
 import { useParams, useNavigate } from "react-router-dom";
 
 const AddText = () => {
-  let {teacherId} = useParams();
+  let { teacherId } = useParams();
   const [title, setTitle] = useState();
   const [errorMsg, setErrorMsg] = useState();
 
-
-  console.log(teacherId)
+  console.log(teacherId);
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch("/add-text", {

@@ -9,6 +9,11 @@ const Texts = () => {
 
   const teacher = localStorage.getItem("teacherId");
 
+  const [addTextForm, setAddTextForm] = useState(false);
+  const textsForm = () => {
+    setAddTextForm(!addTextForm);
+  };
+
   useEffect(() => {
     fetch(`/texts?teacherId=${teacher}`)
       .then((res) => res.json())
@@ -25,13 +30,16 @@ const Texts = () => {
         ? texts.map((text) => {
             return (
               <>
-                <Div>{text.title}</Div>
-                <Link to={`/${text._id}`}>link</Link>
+                <Link to={`/${text._id}`}>
+                  <Div>{text.title}</Div>
+                </Link>
               </>
             );
           })
-        : "error"}
-      <AddText />
+        : "loading"}
+        <button onClick={textsForm}>Add Text </button>
+      {addTextForm && <AddText />}
+      
     </div>
   );
 };

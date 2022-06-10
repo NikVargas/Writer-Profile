@@ -39,12 +39,13 @@ const SignIn = () => {
   };
 
   return (
-    <>
+    <Wrapper>
       <Header />
-      <h1>Create an account</h1>
+      <Title>Sign Up</Title>
       <Form onSubmit={handleSubmit}>
         <label>First Name</label>
         <input
+        placeholder="First name"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
           type="text"
@@ -53,6 +54,7 @@ const SignIn = () => {
         <label>Last name</label>
         <input
           value={lastName}
+          placeholder="Last name"
           onChange={(e) => setLastName(e.target.value)}
           type="text"
           required
@@ -60,13 +62,14 @@ const SignIn = () => {
         <label>Email address</label>
         <input
           value={email}
+          placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
           type="text"
           required
         />
+        <label>Password</label>
         <input
           value={password}
-          placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
           type="password"
           required
@@ -74,14 +77,31 @@ const SignIn = () => {
         <div>{errorMsg}</div>
         <button type="submit">Create account</button>
       </Form>
-    </>
+    </Wrapper>
   );
 };
 
+
+const Wrapper = styled.div`
+margin-block-start: 140px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+`
+
+const Title = styled.h1`
+padding: 20px;
+`
+
 const Form = styled.form`
+  width: 50%;
+  margin-top: 25px;
   display: flex;
   flex-direction: column;
-  margin-block-start: 130px;
+  row-gap: 10px;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default SignIn;

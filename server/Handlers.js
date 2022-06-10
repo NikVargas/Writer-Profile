@@ -259,7 +259,9 @@ const getStudentById = async (req, res) => {
   }
 };
 
-const updateStudentById = async (req, res) => {};
+const updateStudentById = async (req, res) => {
+
+};
 
 const deleteStudentById = async (req, res) => {};
 
@@ -306,7 +308,29 @@ const getTexts = async (req, res) => {
   });
 };
 
-const getTextById = async (req, res) => {};
+const getTextById = async (req, res) => {
+  try {
+    const client = new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const textId = req.params._id;
+    const db = client.db("Writer_Profile");
+    const text = await db.collection("Texts").findOne({
+      _id: ObjectId(textId),
+    });
+    !text
+      ? res.status(400).json({
+          status: 400,
+          message: "Not found.",
+        })
+      : res.status(200).json({
+          status: 200,
+          data: text,
+        });
+    client.close();
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 const updateTextById = async (req, res) => {};
 

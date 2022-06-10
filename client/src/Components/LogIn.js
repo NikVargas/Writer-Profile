@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import TeacherAccount from "./TeacherAccount";
-import Footer from "./Footer";
 import Logo from "./Logo.png";
 import { useState } from "react";
 
@@ -31,7 +29,7 @@ const LogIn = () => {
       </HeaderPage>
       <Section>
         <Form onSubmit={handleSubmit}>
-          <h1>Log In</h1>
+          <Title>Log In</Title>
           <label>E mail</label>
           <input
             value={email}
@@ -55,7 +53,7 @@ const LogIn = () => {
 
 const Wrapper = styled.div`
   height: 100vh;
-  width: 90%;
+  width: 90vw;
 `;
 
 const HeaderPage = styled.div`
@@ -75,21 +73,24 @@ const Img = styled.img`
   width: 150px;
 `;
 
-const Section = styled.section`
-  width: 90vw;
-  height: 98vh;
-  margin-block-start: 100px;
+const Section = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
 `;
 
 const Form = styled.form`
-width: 50%;
-height: 50%;
-display: flex;
-flex-direction: column;
-gap: 10px;
-align-items: center;
-border: 1px midnightblue solid
-
+  width: 50%;
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  justify-content: center;
+  align-items: center;
 `;
 
+const Title = styled.h1`
+padding: 20px;
+`
 export default LogIn;

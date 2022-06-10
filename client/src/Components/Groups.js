@@ -30,12 +30,13 @@ const Groups = () => {
         ? groups.map((group) => {
             return (
               <>
-                <Div>{group.groupName}</Div>
-                <Link to={`/groups/${group._id}`}>link</Link>
+                <Link to={`/groups/${group._id}`}>
+                  <Div>{group.groupName}</Div>
+                </Link>
               </>
             );
           })
-        : "error"}
+        : "loading"}
       <button onClick={addGroupsForm}>Add group </button>
       {addGroupForm && <AddGroup />}
     </>

@@ -22,25 +22,33 @@ const StudentPage = () => {
   }, [studentId]);
 
   return (
-    <>
+    <Wrapper>
+    <Header />
       Student Page
       {student ? (
         <div>
-          <div>
+          <p>
             {student.firstName}
             <spa>{student.lastName}</spa>
-          </div>
+          </p>
           {/* TODO map results */}
-          <div>{student.results}</div>
+          <div>{student.results} results</div>
           {/* TODO map texts */}
-          <div>{student.texts}</div>
+          <div>{student.texts}texts</div>
         </div>
       ) : (
         ""
       )}
-      <Header />
-    </>
+      
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+margin-block-start: 140px;
+
+`
+
+
 
 export default StudentPage;

@@ -34,10 +34,10 @@ const TeacherAccount = () => {
       <Header />
       <Wrapper>
         <div>Avatar</div>
-        {teacher ? <div>Hi! {teacher.firstName} </div> : <p>Hi!</p>}
-        <h1>My groups</h1>
+        {teacher ? <h1>Hi! {teacher.firstName} </h1> : <p>Hi!</p>}
+        <h2>My groups</h2>
         <Groups/>
-        <h1>Homeworks</h1>
+        <h2>Homeworks</h2>
         <Texts/>
 
       </Wrapper>
@@ -48,7 +48,8 @@ const TeacherAccount = () => {
 
 const Wrapper = styled.div`
 margin-block-start: 180px;
-
+width: 90vw;
+height: 98vh;
 `;
 
 

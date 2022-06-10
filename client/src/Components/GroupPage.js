@@ -28,14 +28,17 @@ const GroupPage = () => {
 
   return (
     <div>
-      I,M the group page
       <Header />
       <Container>
-        <> {group ? <div>{group.groupName}</div> : ""}</>
+        
+        <> {group ? 
+        <h2>{group.groupName}</h2> 
+        : "Loading"}</>
+        <Students />
         <button onClick={addStudentsForm}>Add Student</button>
         {addStudentForm && <AddStudent />}
         <div>Display group's students</div>
-        <Students />
+        
       </Container>
     </div>
   );

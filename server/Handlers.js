@@ -81,7 +81,6 @@ const getTeacherById = async (req,res) =>{
         const client = new MongoClient(MONGO_URI, options);
         await client.connect();
         const teacherId = req.params._id;
-        console.log("teacher",teacherId)
         const db = client.db("Writer_Profile");
         const teacher = await db.collection("Teachers").findOne({
             _id: ObjectId(teacherId) 
@@ -149,7 +148,26 @@ const getGroups = async (req,res) =>{
 }
 
 const getGroupById = async (req,res) =>{
-    
+    try {
+        const client = new MongoClient(MONGO_URI, options);
+        await client.connect();
+        const groupId = req.params._id;
+        const db = client.db("Writer_Profile");
+        const group = await db.collection("Groups").findOne({
+            _id: ObjectId(groupId) 
+        });
+        !group ? res.status(400).json({
+            status: 400,
+            message: "Not found."
+        }) : res.status(200).json({
+            status: 200,
+            groupId,
+            data: group,
+        })
+        client.close()
+    } catch (err) {
+        console.log(err);
+    } 
 }
 
 const updateGroupById = async (req,res) =>{

@@ -31,7 +31,7 @@ const {
     updateResultById,
     deleteResultById,
 
-} = require('./Handlers')
+} = require('./handlers')
 
 
 const PORT = 8000;
@@ -71,11 +71,11 @@ express()
 //get all the groups
 .get('/groups', getGroups )
 // get a specific group
-.get('/groups/:id', getGroupById )
+.get('/groups/:_id', getGroupById )
 //Update group
-.patch('/groups/:id', updateGroupById )
+.patch('/groups/:_id', updateGroupById )
 // Delete specific group
-.delete('/groups/:id', deleteGroupById )
+.delete('/groups/:_id', deleteGroupById )
 
 //STUDENTS ENDPOINTS
 //Add student

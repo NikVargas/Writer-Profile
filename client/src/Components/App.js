@@ -27,7 +27,7 @@ const App = () => {
           <Route path="/blog" element={<Blog />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/teachers/:teacherId" element={<TeacherAccount />} />
-          <Route path="/my-groups/:id" element={<GroupPage />} />
+          <Route path="/groups/:groupId" element={<GroupPage />} />
         </Routes>
       </BrowserRouter>
       <Footer/>

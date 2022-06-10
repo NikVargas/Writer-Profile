@@ -11,16 +11,16 @@ const UserProvider = ({children}) =>{
     const [logIn, setLogIn] = useState(false)
     
     let teacherId = useParams().id;
-        console.log(teacherId)
-    useEffect(() => {
-        fetch(`/teachers/${teacherId}`)
-        .then((res) => res.json())
-        .then((data) => {
-            setCurrentTeacher(data);
-            console.log(data);
-        });
-    }, []);
-console.log(currentTeacher)
+        // console.log(teacherId)
+//     useEffect(() => {
+//         fetch(`/teachers/${teacherId}`)
+//         .then((res) => res.json())
+//         .then((data) => {
+//             setCurrentTeacher(data);
+//             console.log(data);
+//         });
+//     }, []);
+// console.log(currentTeacher)
  
     return(
         <UserContext.Provider

@@ -44,7 +44,6 @@ const TeacherAccount = () => {
         {/* need enpoint and handler to create, update and delete groups DB */}
         <button onClick={addGroupsForm}>Add group </button>
         {addGroupForm && <AddGroup />}
-        <div>Display teacher's groups</div>
         <Groups/>
         <h1>Homeworks</h1>
         {/* need enpoint and handler to create, update and delete groups DB */}

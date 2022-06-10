@@ -83,11 +83,11 @@ express()
 //get all the students
 .get('/students', getStudents )
 // get a specific student
-.get('/students/:id', getStudentById )
+.get('/students/:_id', getStudentById )
 //Update student profile
-.patch('/students/:id', updateStudentById )
+.patch('/students/:_id', updateStudentById )
 //delete specific student
-.delete('/students/:id', deleteStudentById )
+.delete('/students/:_id', deleteStudentById )
 
 
 //HOMEWORKS ENDPOINTS
@@ -96,11 +96,11 @@ express()
 //get all homeworks
 .get('/homeworks', getHomeworks )
 //get a specific homework
-.get('/homeworks/:id', getHomeworkById )
+.get('/homeworks/:_id', getHomeworkById )
 // update specific homework
-.patch('homeworks/:id', updateHomeworkById )
+.patch('homeworks/:_id', updateHomeworkById )
 //delete a specific homework
-.delete('/homeworks/:id', deleteHomeworkById )
+.delete('/homeworks/:_id', deleteHomeworkById )
 
 //RESULTS ENDPOINTS
 // add a result
@@ -108,11 +108,11 @@ express()
 //get all results
 .get('/results', getResults )
 //get a specific result
-.get('/results/:id', getResultById )
+.get('/results/:_id', getResultById )
 // update specific result
-.patch('results/:id', updateResultById )
+.patch('results/:_id', updateResultById )
 //delete a specific result
-.delete('/results/:id', deleteResultById )
+.delete('/results/:_id', deleteResultById )
 
 
 

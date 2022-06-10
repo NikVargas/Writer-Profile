@@ -10,6 +10,7 @@ import TeacherAccount from "./TeacherAccount";
 import Footer from "./Footer";
 import styled from "styled-components";
 import GroupPage from "./GroupPage";
+import StudentPage from "./StudentPage";
 
 
 
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/login" element={<LogIn />} />
           <Route path="/teachers/:teacherId" element={<TeacherAccount />} />
           <Route path="/groups/:groupId" element={<GroupPage />} />
+          <Route path="/students/:studentId" element={<StudentPage />} />
         </Routes>
       </BrowserRouter>
       <Footer/>

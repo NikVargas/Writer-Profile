@@ -48,6 +48,7 @@ const getTeachers = async (req,res) =>{
     await client.connect();
     const db = client.db("Writer_Profile");
     const teachers = await db.collection("Teachers").find().toArray();
+    client.close();
     res.status(200).json({
         status: 200,
         data: teachers
@@ -133,7 +134,7 @@ const addGroup = async (req,res) =>{
             console.log(err);
         }
 }
-
+//get groups by teacher
 const getGroups = async (req,res) =>{
     const { teacherId } = req.query
     console.log("teacherId groups", teacherId)
@@ -141,6 +142,7 @@ const getGroups = async (req,res) =>{
     await client.connect();
     const db = client.db("Writer_Profile");
     const groups = await db.collection("Groups").find({teacherId}).toArray();
+    client.close();
     res.status(200).json({
         status: 200,
         data: groups
@@ -210,13 +212,38 @@ const addStudent = async (req,res) =>{
             console.log(err);
         }
 }
-
+//get students by group
 const getStudents = async (req,res) =>{
-    
+    const { groupId } = req.query
+    const client = new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("Writer_Profile");
+    const students = await db.collection("Students").find({group: groupId}).toArray();
+    students ? res.status(200).json({
+        status: 200,
+        data: students
+    }) : "";
 }
-
 const getStudentById = async (req,res) =>{
-    
+    try {
+        const client = new MongoClient(MONGO_URI, options);
+        await client.connect();
+        const studentId = req.params._id;
+        const db = client.db("Writer_Profile");
+        const student = await db.collection("Students").findOne({
+            _id: ObjectId(studentId) 
+        });
+        !student ? res.status(400).json({
+            status: 400,
+            message: "Not found."
+        }) : res.status(200).json({
+            status: 200,
+            data: student,
+        })
+        client.close()
+    } catch (err) {
+        console.log(err);
+    } 
 }
 
 const updateStudentById = async (req,res) =>{

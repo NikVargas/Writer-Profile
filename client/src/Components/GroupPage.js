@@ -18,6 +18,7 @@ const GroupPage = () =>{
     };
     const [ group, setGroup] = useState();
     const [ students, setStudents] = useState();
+
     // console.log("current group id",groupId)
     useEffect(() => {
         fetch(`/groups/${groupId}`)
@@ -26,7 +27,7 @@ const GroupPage = () =>{
               if (data.status === 200){
                 setGroup(data.data);
                 setStudents(data.data.students)
-        //    console.log("group fetch", data.data)
+                localStorage.setItem("groupId", `${groupId}`)
               }
           });
       }, [groupId]);

@@ -23,7 +23,8 @@ try {
         email: req.body.email,
         password: req.body.password,
         groups: [],
-        students: []
+        students: [],
+        texts:[]
     }
     const alreadyUser = await db.collection("Teachers").findOne({ 
         email: req.body.email 
@@ -197,7 +198,6 @@ const addStudent = async (req,res) =>{
         }
         const newStudent = await db.collection("Students").insertOne(student);
         await db.collection("Groups").updateOne({ _id: ObjectId(groupId)}, { $push:{ students: newStudent.insertedId} })
-
         newStudent ?  
           res.status(200).json({
             status: 200,
@@ -255,23 +255,55 @@ const deleteStudentById = async (req,res) =>{
 }
 
 //texts
-const addHomework = async (req,res) =>{
-
+const addText = async (req,res) =>{
+    try {
+        const {teacherId } = req.body
+        const client = new MongoClient(MONGO_URI, options);
+        await client.connect();
+        const db = client.db("Writer_Profile");
+        const newText ={
+            title: req.body.title,
+            teacherId: req.body.teacherId, 
+        }
+        await db.collection("Texts").insertOne(newText);
+        await db.collection("Teachers").updateOne({ 
+            _id: ObjectId(teacherId)}, 
+            { $push: { texts: newText._id } 
+        });
+            res.status(200).json({
+            status: 200,
+            data: newText, 
+            message: "Your text was created.",
+        })
+        client.close();
+        } catch (err) {
+            console.log(err);
+        }
+}
+//get text by teacher
+const getTexts = async (req,res) =>{
+    const { teacherId } = req.query
+    console.log("teacherId groups", teacherId)
+    const client = new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("Writer_Profile");
+    const texts = await db.collection("Texts").find({teacherId}).toArray();
+    client.close();
+    res.status(200).json({
+        status: 200,
+        data: texts
+    });
 }
 
-const getHomeworks = async (req,res) =>{
+const getTextById = async (req,res) =>{
     
 }
 
-const getHomeworkById = async (req,res) =>{
+const updateTextById = async (req,res) =>{
     
 }
 
-const updateHomeworkById = async (req,res) =>{
-    
-}
-
-const deleteHomeworkById = async (req,res) =>{
+const deleteTextById = async (req,res) =>{
     
 }
 
@@ -317,11 +349,11 @@ module.exports = {
     getStudentById,
     updateStudentById,
     deleteStudentById,
-    addHomework,
-    getHomeworks,
-    getHomeworkById,
-    updateHomeworkById,
-    deleteHomeworkById,
+    addText,
+    getTexts,
+    getTextById,
+    updateTextById,
+    deleteTextById,
     addResult,
     getResults,
     getResultById,

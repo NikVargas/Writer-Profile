@@ -4,12 +4,17 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import { Link,  } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import AddGroup from "./AddGroup";
 
 const Groups = () =>{
 let navigate = useNavigate();
    const teacher = localStorage.getItem("teacherId")
    const [ groups, setGroups]= useState();
+
+   const [addGroupForm, setAddGroupForm] = useState(false);
+  const addGroupsForm = () => {
+    setAddGroupForm(!addGroupForm);
+  };
 //    console.log(teacher)
     //get teacher's groups
     useEffect(() => {
@@ -35,7 +40,9 @@ let navigate = useNavigate();
                 <Link to={`/groups/${group._id}`}>link</Link>
                 </>
             )
-        }) : "error"}    
+        }) : "error"}   
+        <button onClick={addGroupsForm}>Add group </button>
+        {addGroupForm && <AddGroup />} 
         </>
     );
 };

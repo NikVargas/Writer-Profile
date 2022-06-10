@@ -20,11 +20,11 @@ const {
     getStudentById,
     updateStudentById,
     deleteStudentById,
-    addHomework,
-    getHomeworks,
-    getHomeworkById,
-    updateHomeworkById,
-    deleteHomeworkById,
+    addText,
+    getTexts,
+    getTextById,
+    updateTextById,
+    deleteTextById,
     addResult,
     getResults,
     getResultById,
@@ -92,15 +92,15 @@ express()
 
 //HOMEWORKS ENDPOINTS
 // add a homework
-.post('/add-homework', addHomework )
-//get all homeworks
-.get('/homeworks', getHomeworks )
-//get a specific homework
-.get('/homeworks/:_id', getHomeworkById )
-// update specific homework
-.patch('homeworks/:_id', updateHomeworkById )
-//delete a specific homework
-.delete('/homeworks/:_id', deleteHomeworkById )
+.post('/add-text', addText )
+//get all Texts
+.get('/texts', getTexts )
+//get a specific Text
+.get('/texts/:_id', getTextById )
+// update specific Text
+.patch('texts/:_id', updateTextById )
+//delete a specific Text
+.delete('/texts/:_id', deleteTextById )
 
 //RESULTS ENDPOINTS
 // add a result

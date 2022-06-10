@@ -4,19 +4,14 @@ import TextHelper from "./TextHelper";
 import Header from "./Header"
 import styled from "styled-components";
 import AddGroup from "./AddGroup";
-import GroupPage from "./GroupPage";
 import Groups from "./Groups";
+import AddText from "./AddText";
+import Texts from "./Texts";
 
 const TeacherAccount = () => {
-  // const navigate = useNavigate();
-  // const [teacherId, setTeacherId] = useState();
+ 
   const [teacher, setTeacher] = useState();
-  const [addGroupForm, setAddGroupForm] = useState(false);
   let {teacherId} = useParams();
-
-  const addGroupsForm = () => {
-    setAddGroupForm(!addGroupForm);
-  };
 
 
   //get teacher information
@@ -41,15 +36,10 @@ const TeacherAccount = () => {
         <div>Avatar</div>
         {teacher ? <div>Hi! {teacher.firstName} </div> : <p>Hi!</p>}
         <h1>My groups</h1>
-        {/* need enpoint and handler to create, update and delete groups DB */}
-        <button onClick={addGroupsForm}>Add group </button>
-        {addGroupForm && <AddGroup />}
         <Groups/>
         <h1>Homeworks</h1>
-        {/* need enpoint and handler to create, update and delete groups DB */}
-        <button>Add homework</button>
-        
-        <TextHelper />
+        <Texts/>
+
       </Wrapper>
     </>
   );

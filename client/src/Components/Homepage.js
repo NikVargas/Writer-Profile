@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Header from "./Header";
+import Header from "./Header/Header";
 import notebook_img from "./notebook_img.png";
 
 const Homepage = () => {

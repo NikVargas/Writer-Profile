@@ -35,8 +35,7 @@ const AddText = () => {
 
   return (
     <>
-      Add new text
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <label>Text Title</label>
         <input
           value={title}
@@ -44,9 +43,17 @@ const AddText = () => {
           type="text"
           placeholder="New text"></input>
         <button>Submit</button>
-      </form>
+      </Form>
     </>
   );
 };
 
 export default AddText;
+
+
+const Form = styled.form`
+  width: 400px;
+  height: 50px;
+  margin: 10px;
+  border: 1px solid yellowgreen;
+`;

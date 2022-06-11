@@ -1,17 +1,17 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import GlobalStyles from "./GlobalStyles";
 import Homepage from "./Homepage";
-import SignIn from "./SignIn";
-import Blog from "./Blog";
-import LogIn from "./LogIn";
-import HelpCenter from "./Help-Center";
-import Store from "./Store";
-import TeacherAccount from "./TeacherAccount";
+import SignIn from "./Header/SignIn"
+import Blog from "./Header/Blog"
+import LogIn from "./Header/LogIn";
+import HelpCenter from "./Header/Help-Center";
+import Store from "./Header/Store";
+import TeacherAccount from "./Teachers/TeacherAccount";
 import Footer from "./Footer";
 import styled from "styled-components";
-import GroupPage from "./GroupPage";
-import StudentPage from "./StudentPage";
-import TextDoc from "./TextDoc";
+import GroupPage from "./Groups/GroupPage";
+import TextDoc from "./Texts/TextDoc";
+import StudentPage from "./Students/StudentPage"
 
 
 const App = () => {

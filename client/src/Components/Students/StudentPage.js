@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Header from "./Header";
+import Header from "../Header/Header";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
@@ -24,17 +24,16 @@ const StudentPage = () => {
   return (
     <Wrapper>
     <Header />
-      Student Page
+      <h1>Student Page</h1>
       {student ? (
         <div>
-          <p>
-            {student.firstName}
-            <spa>{student.lastName}</spa>
-          </p>
+          <h2>
+            {student.firstName}<span> {student.lastName}</span>
+          </h2>
           {/* TODO map results */}
-          <div>{student.results} results</div>
+          <h3>{student.results} results</h3>
           {/* TODO map texts */}
-          <div>{student.texts}texts</div>
+          <h3>{student.texts}texts</h3>
         </div>
       ) : (
         ""
@@ -44,8 +43,7 @@ const StudentPage = () => {
   );
 };
 
-const Wrapper = styled.div`
-margin-block-start: 140px;
+const Wrapper = styled.section`
 
 `
 

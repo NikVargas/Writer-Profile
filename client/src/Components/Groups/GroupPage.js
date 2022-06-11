@@ -1,12 +1,13 @@
 import styled from "styled-components";
-import Header from "./Header";
+import Header from "../Header/Header";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import AddStudent from "./AddStudent";
-import Students from "./Students";
+import AddStudent from "../Students/AddStudent";
+import Students from "../Students/Students";
 
 const GroupPage = () => {
   let { groupId } = useParams();
+  
   const [addStudentForm, setAddStudentForm] = useState(false);
 
   const addStudentsForm = () => {
@@ -34,18 +35,18 @@ const GroupPage = () => {
         <> {group ? 
         <h2>{group.groupName}</h2> 
         : "Loading"}</>
+        <h3>Students</h3>
         <Students />
         <button onClick={addStudentsForm}>Add Student</button>
         {addStudentForm && <AddStudent />}
-        <div>Display group's students</div>
         
       </Container>
     </div>
   );
 };
 
-const Container = styled.div`
-  margin-top: 120px;
+const Container = styled.section`
+
 `;
 
 export default GroupPage;

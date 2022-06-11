@@ -1,4 +1,4 @@
-import AddText from "./AddText";
+import AddText from "../Texts/AddText";
 import { useState } from "react";
 import { useEffect } from "react";
 import styled from "styled-components";

@@ -51,7 +51,9 @@ const AddGroup = () => {
 };
 
 const Form = styled.form`
-  width: 200px;
-  height: 300px;
+  width: 400px;
+  height: 50px;
+  margin: 10px;
+  border: 1px solid yellowgreen;
 `;
 export default AddGroup;

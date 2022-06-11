@@ -34,7 +34,7 @@ const AddStudent = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <label>Student First Name</label>
         <input
           value={firstName}
@@ -54,9 +54,19 @@ const AddStudent = () => {
           type="text"
           placeholder="Email"></input>
         <button>Submit</button>
-      </form>
+      </Form>
     </>
   );
 };
 
 export default AddStudent;
+
+
+
+const Form = styled.form`
+  width: fit-content;
+  height: fit-content;
+  padding: 10px;
+  margin: 20px;
+  border: 1px solid yellowgreen;
+`;

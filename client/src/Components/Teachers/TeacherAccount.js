@@ -1,12 +1,11 @@
 import {  useState, useEffect } from "react";
 import {  useParams } from "react-router-dom";
-import TextHelper from "./TextDoc";
-import Header from "./Header"
+import Header from "../Header/Header"
 import styled from "styled-components";
-import AddGroup from "./AddGroup";
-import Groups from "./Groups";
-import AddText from "./AddText";
-import Texts from "./Texts";
+import AddGroup from "../Groups/AddGroup"
+import Groups from "../Groups/Groups";
+import AddText from "../Texts/AddText";
+import Texts from "../Texts/Texts";
 
 const TeacherAccount = () => {
  
@@ -34,22 +33,20 @@ const TeacherAccount = () => {
       <Header />
       <Wrapper>
         <div>Avatar</div>
-        {teacher ? <h1>Hi! {teacher.firstName} </h1> : <p>Hi!</p>}
-        <h2>My groups</h2>
-        <Groups/>
-        <h2>Homeworks</h2>
-        <Texts/>
-
+          {teacher ? <h1>Hi! {teacher.firstName} </h1> : <p>Hi!</p>}
+        <div><h2>My groups</h2>
+        <Groups/></div>
+        <div><h2>Homeworks</h2>
+        <Texts/></div>
       </Wrapper>
     </>
   );
 };
 
 
-const Wrapper = styled.div`
-margin-block-start: 180px;
-width: 90vw;
-height: 98vh;
+const Wrapper = styled.section`
+display: flex;
+flex-direction: column;
 `;
 
 

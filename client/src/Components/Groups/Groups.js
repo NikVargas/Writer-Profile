@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import AddGroup from "./AddGroup";
+import AddGroup from "../Groups/AddGroup";
 
 const Groups = () => {
   const teacher = localStorage.getItem("teacherId");

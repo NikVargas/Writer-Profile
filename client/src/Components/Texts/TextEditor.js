@@ -21,7 +21,7 @@ const TextEditor = () =>{
 //  }, [])
 
 
-
+console.log(myProduction)
   return (
     <ReactQuill value={myProduction}
                   onChange={setMyProduction} />

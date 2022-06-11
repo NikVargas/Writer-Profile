@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { UserContext } from "./UserContext";
+import { UserContext } from "../UserContext";
 import { useEffect } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";

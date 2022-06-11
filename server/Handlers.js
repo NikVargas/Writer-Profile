@@ -176,8 +176,12 @@ const getGroupById = async (req, res) => {
     console.log(err);
   }
 };
+//UPDATE TEXT BETWEEN STUDENTS AND GROUPS
+const updateGroupById = async (req, res) => {
 
-const updateGroupById = async (req, res) => {};
+
+
+};
 
 const deleteGroupById = async (req, res) => {};
 //STUDENTS
@@ -197,11 +201,7 @@ const addStudent = async (req, res) => {
       results: [],
     };
     const newStudent = await db.collection("Students").insertOne(student);
-    await db
-      .collection("Groups")
-      .updateOne(
-        { _id: ObjectId(groupId) },
-        { $push: { students: newStudent.insertedId } }
+    await db.collection("Groups").updateOne({ _id: ObjectId(groupId) },{ $push: { students: newStudent.insertedId } }
       );
     newStudent
       ? res.status(200).json({
@@ -265,7 +265,7 @@ const updateStudentById = async (req, res) => {
 
 const deleteStudentById = async (req, res) => {};
 
-//texts
+//texts to the collection, update teacher and studentss texts
 const addText = async (req, res) => {
   try {
     const { teacherId } = req.body;
@@ -277,12 +277,8 @@ const addText = async (req, res) => {
       teacherId: req.body.teacherId,
     };
     await db.collection("Texts").insertOne(newText);
-    await db.collection("Teachers").updateOne(
-      {
-        _id: ObjectId(teacherId),
-      },
-      { $push: { texts: newText._id } }
-    );
+    await db.collection("Teachers").updateOne({ _id: ObjectId(teacherId),}, { $push: { texts: newText._id } });
+    await db.collection("Students").updateMany({ teacher: teacherId },{ $push: { texts: newText._id } });
     res.status(200).json({
       status: 200,
       data: newText,
@@ -308,6 +304,7 @@ const getTexts = async (req, res) => {
   });
 };
 
+//texts by userId
 const getTextById = async (req, res) => {
   try {
     const client = new MongoClient(MONGO_URI, options);

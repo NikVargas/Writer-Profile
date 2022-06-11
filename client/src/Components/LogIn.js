@@ -41,7 +41,7 @@ const LogIn = () => {
           <input
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            type="text"
+            type="password"
             placeholder="Password"></input>
           <button> LOG IN </button>
           <p>Forgot your password?</p>

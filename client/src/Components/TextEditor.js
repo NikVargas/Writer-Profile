@@ -1,33 +1,30 @@
-// import Quill from ' quill';
-// import "quill/dist/quill.snow.css"
-// // import { useEffect } from 'react';
-// import quill from "react-quill"
+
+import 'react-quill/dist/quill.snow.css';
 import styled from 'styled-components';
+import ReactQuill from 'react-quill'
+import { useState } from 'react';
 
 
 const TextEditor = () =>{
 
 
-// useEffect(()=>{
-// new Quill('#editor-container', {
-//     modules: {
-//       toolbar: [
-//         [{ header: [1, 2, false] }],
-//         ['bold', 'italic', 'underline'],
-//         ['image', 'code-block']
-//       ]
-//     },
-//     placeholder: 'Compose an epic...',
-//     theme: 'snow'  // or 'bubble'
-//   });
-// }, [])
+    const [text, setText] = useState();
+    const [ myProduction, setMyProduction] = useState("");
+    
+    const textProduction = (e) =>{
+      setMyProduction(e.target.value)
+      console.log(e.target.value)
+    }
+//  useEffect(()=>{
+// new Quill('#container', { theme: 'snow'  // or 'bubble'
+//    });
+//  }, [])
 
 
 
   return (
-    <Container className='editor-container'>
-        ghfghdfgh
-    </Container>
+    <ReactQuill value={myProduction}
+                  onChange={setMyProduction} />
   )
 }
 

@@ -12,12 +12,14 @@ const TextDoc = () => {
 
   let { textId } = useParams();
   const [text, setText] = useState();
-  const [ myProduction, setMyProduction] = useState();
+  const [ myProduction, setMyProduction] = useState("");
   
   const textProduction = (e) =>{
     setMyProduction(e.target.value)
+
   }
 
+  console.log(myProduction)
   console.log(textId);
   useEffect(() => {
     fetch(`/texts/${textId}`)
@@ -32,19 +34,26 @@ const TextDoc = () => {
   }, [textId]);
 
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch("https://api.languagetool.org/v2/check", {
+      body: new URLSearchParams({
+        text: myProduction,
+        language: "fr",
+        level: "default",
+      }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+      });
+  };
 
-  useEffect(()=>{
-    // new Quill("Container", {theme: 'snow'})
-  }, [])
 
-//   const userText = () => {
-//     fetch(`/texts/${textId}`, {
-//         body: JSON.stringify({ status: tweetMessage }),
-//         method: "PATCH",
-//         headers: {
-//             "Content-Type": "application/json",
-//         }
-// })};
 
 
 
@@ -52,7 +61,7 @@ const TextDoc = () => {
     <>
       <div>{ text ? 
       <h2>{text.title}</h2> : ""}</div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <textarea
         type="text"
         placeholder="My text"

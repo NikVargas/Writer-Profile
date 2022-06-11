@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import Header from "../Header/Header";
 import TextEditor from "./TextEditor";
 
 
@@ -59,6 +60,8 @@ const TextDoc = () => {
 
   return (
     <>
+    <Header/>
+    <Wrapper>
       <div>{ text ? 
       <h2>{text.title}</h2> : ""}</div>
       <form onSubmit={handleSubmit}>
@@ -71,17 +74,20 @@ const TextDoc = () => {
         <button>submit</button>
       </form>
       <TextEditor/>
+      </Wrapper>
     </>
   );
 };
 
+export default TextDoc;
 
+
+const Wrapper = styled.section`
+
+`;
 
 const Container = styled.div`
 
 
 
 `;
-
-
-export default TextDoc;

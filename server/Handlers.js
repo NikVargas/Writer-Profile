@@ -74,6 +74,15 @@ const getTeacherByEmail = async (req, res) => {
           status: 400,
           message: "User don't exist. Please create an account.",
         });
+    student ? res.status(200).json({
+      status: 200,
+      data: isUser,
+      message: "Welcome back!",
+    }) 
+    :  res.status(400).json({
+      status: 400,
+      message: "User don't exist. Please create an account.",
+    });
     client.close();
   } catch (err) {
     console.log(err);
@@ -127,7 +136,7 @@ const addGroup = async (req, res) => {
       },
       { $push: { groups: newGroup._id } }
     );
-    res.status(200).json({
+    res.status(201).json({
       status: 200,
       data: newGroup,
       message: "Your group was created.",
@@ -241,9 +250,7 @@ const getStudentById = async (req, res) => {
     await client.connect();
     const studentId = req.params._id;
     const db = client.db("Writer_Profile");
-    const student = await db.collection("Students").findOne({
-      _id: ObjectId(studentId),
-    });
+    const student = await db.collection("Students").findOne({_id: ObjectId(studentId)});
     !student
       ? res.status(400).json({
           status: 400,
@@ -252,6 +259,29 @@ const getStudentById = async (req, res) => {
       : res.status(200).json({
           status: 200,
           data: student,
+        });
+    client.close();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const getStudentByEmail = async (req, res) => {
+  try {
+    const client = new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("Writer_Profile");
+    const { email } = req.query;
+    const isUser = await db.collection("Students").findOne({ email });
+    isUser
+      ? res.status(200).json({
+          status: 301,
+          data: isUser,
+          message: "Welcome back!",
+        })
+      : res.status(400).json({
+          status: 400,
+          message: "Your teacher have to create your account.",
         });
     client.close();
   } catch (err) {
@@ -328,8 +358,10 @@ const getTextById = async (req, res) => {
     console.log(err);
   }
 };
+//update student text 
+const updateTextById = async (req, res) => {
 
-const updateTextById = async (req, res) => {};
+};
 
 const deleteTextById = async (req, res) => {};
 
@@ -358,6 +390,7 @@ module.exports = {
   addStudent,
   getStudents,
   getStudentById,
+  getStudentByEmail,
   updateStudentById,
   deleteStudentById,
   addText,

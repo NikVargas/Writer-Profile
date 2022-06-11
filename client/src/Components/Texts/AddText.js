@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useParams, useNavigate } from "react-router-dom";
 
 const AddText = () => {
+  let navigate = useNavigate();
   let { teacherId } = useParams();
   const [title, setTitle] = useState();
   const [errorMsg, setErrorMsg] = useState();
@@ -24,8 +25,7 @@ const AddText = () => {
       .then((data) => {
         if (data.status === 200) {
           // setGroup(data.data)
-          // setMyTeacherId(data.data.teacherId)
-          // data.data._id && navigate(`/my-groups/${data.data._id}`)
+          data.data._id && navigate(`/texts/${data.data._id}`)
           console.log(data);
         } else {
           setErrorMsg("Error");
@@ -35,6 +35,7 @@ const AddText = () => {
 
   return (
     <>
+    { teacherId ? 
       <Form onSubmit={handleSubmit}>
         <label>Text Title</label>
         <input
@@ -43,7 +44,7 @@ const AddText = () => {
           type="text"
           placeholder="New text"></input>
         <button>Submit</button>
-      </Form>
+      </Form> : ""}
     </>
   );
 };

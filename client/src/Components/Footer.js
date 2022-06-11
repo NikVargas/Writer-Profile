@@ -26,6 +26,7 @@ const Wrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
   padding: 10px;
+  background-color: white;
 `;
 
 export default Footer;

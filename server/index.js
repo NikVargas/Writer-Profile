@@ -16,6 +16,7 @@ const {
   addStudent,
   getStudents,
   getStudentById,
+  getStudentByEmail,
   updateStudentById,
   deleteStudentById,
   addText,
@@ -93,6 +94,8 @@ express()
   .get("/students", getStudents)
   // get a specific student
   .get("/students/:_id", getStudentById)
+
+  .get("student/login", getStudentByEmail)
   //Update student profile
   .patch("/students/:_id", updateStudentById)
   //delete specific student
@@ -105,8 +108,8 @@ express()
   .get("/texts", getTexts)
   //get a specific Text
   .get("/texts/:_id", getTextById)
-  // update specific Text
-  .patch("texts/:_id", updateTextById)
+  // update specific student's Text
+  .patch("/:studentId/texts/:_id", updateTextById)
   //delete a specific Text
   .delete("/texts/:_id", deleteTextById)
 

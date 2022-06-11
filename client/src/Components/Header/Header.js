@@ -1,14 +1,17 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Logo from "/Users/nikollevargas/Desktop/WD.Bootcamp/WD_Final-Project/client/src/Components/Logo.png";
 
 const Header = () => {
+
+  
+
   return (
     <Wrapper>
       <Link to={`/`}>
         <Img src={Logo}></Img>
       </Link>
-      <Div>
+    <Div>
         <Link to={`/store`}>
           <Button>Store</Button>
         </Link>
@@ -21,7 +24,7 @@ const Header = () => {
         <Link to={`/login`}>
           <Button>Log In</Button>
         </Link>
-      </Div>
+      </Div> 
     </Wrapper>
   );
 };

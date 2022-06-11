@@ -15,23 +15,41 @@ const TextEditor = () =>{
       setMyProduction(e.target.value)
       console.log(e.target.value)
     }
-//  useEffect(()=>{
-// new Quill('#container', { theme: 'snow'  // or 'bubble'
-//    });
-//  }, [])
+    // const handleSubmit = (e) => {
+    //   e.preventDefault();
+    //   fetch("https://api.languagetool.org/v2/check", {
+    //     body: new URLSearchParams({
+    //       text: myProduction,
+    //       language: "fr",
+    //       level: "default",
+    //     }),
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/x-www-form-urlencoded",
+    //     },
+    //   })
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       console.log(data)
+    //     });
+    // };
 
 
 console.log(myProduction)
   return (
-    <ReactQuill value={myProduction}
-                  onChange={setMyProduction} />
+    <>
+    <StyledReactQuill
+      theme='snow'
+      value={myProduction}
+      onChange={setMyProduction}
+      placeholder=" Be creatif and ask your-self the right questions!" />
+                  
+    </>
   )
 }
 
 export default TextEditor;
 
-
-const Container = styled.div`
- height: 375px;
- border: 1px solid violet
+const StyledReactQuill = styled(ReactQuill)`
+height: 60vh;
 `;

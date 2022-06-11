@@ -17,6 +17,22 @@ const LogIn = () => {
         navigate(`/teachers/${data.data._id}`);
       });
   };
+
+  // const handleStudentSubmit = (e) => {
+  //   e.preventDefault();
+  //   fetch(`/student/login?email=${email}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log("logIn", data);
+  //       if (data.status === false){
+  //         navigate(`/students/${data.data._id}`);
+  //       }
+  //     });
+  // };
+
+
+
+
   return (
     <Wrapper>
       <HeaderPage>

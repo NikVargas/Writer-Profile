@@ -124,8 +124,5 @@ const Form = styled.form`
 `;
 
 const Quill = styled.div`
-border: solid 2px yellowgreen;
-z-index: 3;
-padding: 30px;
-width: 90%;
+
 `

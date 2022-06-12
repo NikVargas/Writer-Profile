@@ -38,7 +38,7 @@ const Students = () => {
               </>
             );
           })
-        : "error"}
+        : "Loading"}
     </>
   );
 };

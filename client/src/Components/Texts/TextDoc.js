@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../Header/Header";
+import QuillText from "./QuillText";
 import TextEditor from "./TextEditor";
 
 
@@ -14,6 +15,7 @@ const TextDoc = () => {
   let { textId } = useParams();
   const [text, setText] = useState();
   const [ myProduction, setMyProduction] = useState("");
+  const [correction, setCorrection] =useState()
   
   const textProduction = (e) =>{
     setMyProduction(e.target.value)
@@ -50,13 +52,10 @@ const TextDoc = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
+        console.log(data.matches)
+        setCorrection(data.matches)
       });
   };
-
-
-
-
 
   return (
     <>
@@ -73,7 +72,21 @@ const TextDoc = () => {
         <Container></Container>
         <button>submit</button>
       </form>
-      <TextEditor/>
+        {correction ? 
+        correction.map((error)=>{
+          return(
+            <>
+            <div>{error.message}</div>
+            <div>{error.offset}</div>
+            <div>{error.length}</div>
+            {}
+            {/* <div>{error.replacements}</div> */}
+            </>
+          )
+        }): ""}
+      
+      {/* <TextEditor/> */}
+      {/* <QuillText/> */}
       </Wrapper>
     </>
   );

@@ -16,13 +16,17 @@ button {
 }
 
 section{
+background-color: white;
 margin-block-start: 140px;
-width: 90vw;
-height: 98vh;
+width: 100vw;
+min-height: 100vh;
 left: 0;
 right: 0;
 margin-left: auto;
 margin-right: auto;
+position: relative;
+z-index: 1;
+padding: 2rem;
 }
 
 `;

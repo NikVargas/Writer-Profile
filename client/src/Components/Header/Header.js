@@ -18,9 +18,9 @@ const Header = () => {
         <Link to={`/help-center`}>
           <Button>Help center</Button>
         </Link>
-        <Link to={`/blog`}>
-          <Button>Blog</Button>
-        </Link>
+        {/* <Link to={`/blog`}>
+          <Button>Blog</Button> */}
+        {/* </Link> */}
         <Link to={`/login`}>
           <Button>Log In</Button>
         </Link>
@@ -30,7 +30,7 @@ const Header = () => {
 };
 
 const Wrapper = styled.div`
-  width: 90%;
+  width: 98%;
   height: 60px;
   display: flex;
   flex-direction: row;
@@ -43,18 +43,23 @@ const Wrapper = styled.div`
   margin-right: auto;
   top: 0%;
   padding: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
   z-index: 2;
   background-color: white;
 
 `;
 
 const Img = styled.img`
-  width: 160px;
+  width: 180px;
+  padding: 30px;
+  margin-top: 14%;
 `;
 
 const Div = styled.div`
   display: flex;
   gap: 8px;
+  padding: 30px;
 `;
 
 const Button = styled.button`

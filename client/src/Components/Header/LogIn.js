@@ -34,6 +34,7 @@ const LogIn = () => {
 
 
   return (
+    <>
     <Wrapper>
       <HeaderPage>
         <Link to={`/`}>
@@ -64,49 +65,46 @@ const LogIn = () => {
         </Form>
       </Section>
     </Wrapper>
+    </>
   );
 };
 
 const Wrapper = styled.div`
-  height: 100vh;
-  width: 90vw;
 `;
 
 const HeaderPage = styled.div`
-  top: 0;
-  position: sticky;
-  left: 0;
-  right: 0;
   margin-left: auto;
   margin-right: auto;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
+  width: 100%; 
 `;
 const Img = styled.img`
-  width: 150px;
+  width: 180px;
+  padding: 30px;
+  margin-top: 14%;
 `;
 
 const Section = styled.div`
+margin-block-start: 40px;
 display: flex;
 flex-direction: column;
 justify-content: center;
-align-items: center;
+align-items: center; 
 `;
 
 const Form = styled.form`
   width: 50%;
-  margin-top: 25px;
   display: flex;
   flex-direction: column;
   row-gap: 10px;
   justify-content: center;
-  align-items: center;
+  align-items: center; 
 `;
 
 const Title = styled.h1`
-padding: 20px;
+padding: 20px; 
 `
 export default LogIn;

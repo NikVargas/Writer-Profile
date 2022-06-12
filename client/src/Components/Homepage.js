@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Header from "./Header/Header";
 import notebook_img from "./notebook_img.png";
+import { Link } from "react-router-dom";
 
 const Homepage = () => {
   return (
@@ -8,8 +9,10 @@ const Homepage = () => {
       <Header />
       <Div>
         <Text>
-          Help your students during the self-correction of texts.
+          Help your students during the self-correction.
+          <Link to={`/help-center`}>
           <Button>More Info</Button>
+          </Link>
         </Text>
         <Img src={notebook_img} />
       </Div>
@@ -17,49 +20,36 @@ const Homepage = () => {
   );
 };
 
-const Wrapper = styled.div`
-  z-index: 0;
-  background-image: linear-gradient(
-    to bottom,
-    transparent 50%,
-    midnightblue 50%
-  );
-
-  :after {
-    content: "";
-    display: block;
-    min-height: 98vh;
-  }
+const Wrapper = styled.section`
+  
 `;
+
 const Div = styled.div`
-  width: 90%;
-  padding: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-
   position: sticky;
-  mix-blend-mode: difference;
-  min-height: 98vh;
+  gap: 120px;
 `;
 
-const Img = styled.img`
-  max-width: 350px;
-  z-index: 2;
+const Text = styled.div`
+display: flex;
+flex-direction: column;
+font-size: 45px;
+font-weight: bold;
+z-index: 2;
 `;
 
 const Button = styled.button`
   padding: 10px 50px 10px;
   border-radius: 200px;
   box-shadow: 5px 5px midnightblue;
-  position: relative;
-  top: 40px;
+  top: 50px;
+`;
+const Img = styled.img`
+max-width: 350px;
+position: sticky;
 `;
 
-const Text = styled.div`
-  font-size: 45px;
-  font-weight: bold;
-  z-index: 2;
-`;
 
 export default Homepage;

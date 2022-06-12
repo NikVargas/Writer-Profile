@@ -1,32 +1,37 @@
 import styled from "styled-components";
+import Logo from "/Users/nikollevargas/Desktop/WD.Bootcamp/WD_Final-Project/client/src/Components/Logo (2).png";
 
 const Footer = () => {
   return (
     <Wrapper>
-      <div>WritingProfile</div>
-      <div>CONTACT</div>
-      <div>
-        <p>Privacy Policy</p>
-        <p>Terms of Service</p>
-        <p>About Us</p>
-      </div>
+      <Img src={Logo}/>
     </Wrapper>
   );
 };
 
+
+export default Footer;
+
+
 const Wrapper = styled.div`
-  width: 90%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  position: fixed;
   bottom: 0%;
   left: 0;
   right: 0;
   margin-left: auto;
   margin-right: auto;
-  padding: 10px;
-  background-color: white;
+  position: sticky;
+  width: 98%;
+  color: white;
+  background: midnightblue;
+  display: grid;
+  place-items: center;
+  padding: 50px;
+  * {
+  box-sizing: border-box;
+}
 `;
 
-export default Footer;
+const Img = styled.img`
+width: 200px;
+`
+

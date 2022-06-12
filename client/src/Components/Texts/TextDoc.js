@@ -19,7 +19,6 @@ const TextDoc = () => {
   
   const textProduction = (e) =>{
     setMyProduction(e.target.value)
-
   }
 
   console.log(myProduction)
@@ -35,6 +34,10 @@ const TextDoc = () => {
         }
       });
   }, [textId]);
+
+
+
+
 
 
   const handleSubmit = (e) => {
@@ -63,15 +66,16 @@ const TextDoc = () => {
     <Wrapper>
       <div>{ text ? 
       <h2>{text.title}</h2> : ""}</div>
-      <form onSubmit={handleSubmit}>
-        <textarea
+      
+      <Form onSubmit={handleSubmit}>
+        <Textarea
         type="text"
         placeholder="My text"
         value={myProduction}
-        onChange={textProduction}></textarea>
+        onChange={textProduction}></Textarea>
         <Container></Container>
         <button>submit</button>
-      </form>
+      </Form>
         {correction ? 
         correction.map((error)=>{
           return(
@@ -85,8 +89,10 @@ const TextDoc = () => {
           )
         }): ""}
       
-      {/* <TextEditor/> */}
-      {/* <QuillText/> */}
+      {/* <TextEditor/>  */}
+      <Quill>
+         <QuillText/>
+        </Quill> 
       </Wrapper>
     </>
   );
@@ -101,6 +107,25 @@ const Wrapper = styled.section`
 
 const Container = styled.div`
 
+`;
+
+const Textarea = styled.textarea`
+width: 90vw;
+min-height: 30vh;
+border: 1px solid midnightblue;
+padding: 20px;
+margin-top: 10px;
+`;
+
+const Form = styled.form`
+
 
 
 `;
+
+const Quill = styled.div`
+border: solid 2px yellowgreen;
+z-index: 3;
+padding: 30px;
+width: 90%;
+`

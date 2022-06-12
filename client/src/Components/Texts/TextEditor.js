@@ -42,7 +42,7 @@ console.log(myProduction)
       theme='snow'
       value={myProduction}
       onChange={setMyProduction}
-      placeholder=" Be creatif and ask your-self the right questions!" />
+      placeholder="Your text here!" />
                   
     </>
   )
@@ -52,4 +52,5 @@ export default TextEditor;
 
 const StyledReactQuill = styled(ReactQuill)`
 height: 60vh;
+padding: 60px;
 `;

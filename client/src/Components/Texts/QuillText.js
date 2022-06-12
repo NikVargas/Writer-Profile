@@ -1,56 +1,66 @@
+import Quill from "quill/";
+import "/node_modules/quill/dist/quill.snow.css"
+import { useCallback } from "react";
 import styled from "styled-components";
-import Quill from "quill";
-import { useState } from "react";
 
-
-
-
-const QuillText = ()=>{
-
-    const [ myProduction, setMyProduction] = useState("");
-    const [correction, setCorrection] =useState()
-    
-    const textProduction = (e) =>{
-      setMyProduction(e.target.value)
+ const QuillText = () =>{
   
-    }
+  const wrapperRef = useCallback(wrapper=>{
+   
+    if (wrapper == null) return
+    wrapper.innerHTML = ""
+    const editor = document.createElement('div')
+    wrapper.append(editor)
+    new Quill(editor, {theme: "snow"})
+    //You got it!!!dfgdsfg
+  }, [])
+
+   return (
+   <Div id="container" ref={wrapperRef}></Div>
+   
+   )
+ };
 
 
-      const modules = {
-        toolbar: [
-            ['bold', 'italic'],
-            ['link', 'blockquote', 'code-block', 'image'],
-            [{ list: 'ordered' }, { list: 'bullet' }]
-          ]
-      }
+ export default QuillText;
+
+const Div = styled.div`
+
+`
+
+// const QuillText = () =>{
+
+// const wrapperRef = useCallback((wrapper)=>{
+//   if(wrapper === null){
+//     return wrapper = ""
+//   }
+// }, [],);
 
 
 
+//   return(
+//     <>
+//     { wrapper === null ? "" :
+//     <EditorDiv> 
+//       {new Quill( <div id="container" ref={wrapperRef}></div>, {theme: "snow"})}
+//     </EditorDiv>
+//     }
+    
+//     {/* <div ref={wrapperRef}></div> */}
+    
+    
+    
+//     </>
+//   )
+// }
+
+// export default QuillText;
 
 
-return(
-    <Quill
-    modules={modules}
-    placeholder="Compose an epic..."
-    theme="snow">
-        <Form>
-            <input
-            onChange={setMyProduction}></input>
-        </Form>
-    </Quill>
-)
 
-};
+// const EditorDiv= styled.div`
 
-export default QuillText;
+// `
 
 
-const EditorContainer = styled.div`
-height: 375px;
 
-
-`;
-
-const Form = styled.form`
-
-`;

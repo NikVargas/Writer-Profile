@@ -40,9 +40,10 @@ const LogIn = () => {
         <Link to={`/`}>
           <Img src={Logo} />
         </Link>
+        <Div>
         <Link to={`/sign-in`}>
           <div>CREATE ACCOUNT</div>
-        </Link>
+        </Link></Div>
       </HeaderPage>
       <Section>
         <Form onSubmit={handleSubmit}>
@@ -73,22 +74,31 @@ const Wrapper = styled.div`
 `;
 
 const HeaderPage = styled.div`
-  margin-left: auto;
-  margin-right: auto;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 100%; 
+  width: 100vw; 
+  position: fixed;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  top: 0%;
+  z-index: 2;
+  background-color: white;
 `;
+
 const Img = styled.img`
   width: 180px;
   padding: 30px;
-  margin-top: 14%;
 `;
 
-const Section = styled.div`
-margin-block-start: 40px;
+const Div =styled.div`
+padding: 70px;
+`
+
+const Section = styled.section`
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -97,6 +107,7 @@ align-items: center;
 
 const Form = styled.form`
   width: 50%;
+  margin-top: -380px;
   display: flex;
   flex-direction: column;
   row-gap: 10px;

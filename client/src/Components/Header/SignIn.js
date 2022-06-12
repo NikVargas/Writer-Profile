@@ -70,6 +70,7 @@ const SignIn = () => {
         <label>Password</label>
         <input
           value={password}
+          placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
           type="password"
           required
@@ -82,11 +83,9 @@ const SignIn = () => {
 };
 
 
-const Wrapper = styled.div`
-margin-block-start: 140px;
+const Wrapper = styled.section`
 display: flex;
 flex-direction: column;
-justify-content: center;
 align-items: center;
 `
 
@@ -95,8 +94,6 @@ padding: 20px;
 `
 
 const Form = styled.form`
-  width: 50%;
-  margin-top: 25px;
   display: flex;
   flex-direction: column;
   row-gap: 10px;

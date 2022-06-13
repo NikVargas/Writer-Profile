@@ -32,12 +32,11 @@ const TeacherAccount = () => {
     <>
       <Header />
       <Wrapper>
-        <div>Avatar</div>
-          {teacher ? <h1>Hi! {teacher.firstName} </h1> : <p>Hi!</p>}
-        <div><h2>My groups</h2>
+          {teacher ? <H1>Hi! {teacher.firstName} </H1> : <p>Hi!</p>}
+        <div><H2>My groups</H2>
         <Groups/></div>
-        <div><h2>Homeworks</h2>
-        <Texts/></div>
+        <Div><H2>My texts</H2>
+        <Texts/></Div>
       </Wrapper>
     </>
   );
@@ -49,6 +48,19 @@ display: flex;
 flex-direction: column;
 `;
 
+const H1 = styled.h1`
+margin-bottom: 30px;
+font-size: 40px;
+`;
 
+const Div = styled.div`
+margin-top: 30px;
+
+`;
+
+const H2 = styled.h2`
+margin-bottom: 30px;
+font-size: 30px;
+`;
 
 export default TeacherAccount;

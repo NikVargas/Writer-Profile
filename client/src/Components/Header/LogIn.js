@@ -14,7 +14,18 @@ const LogIn = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("logIn", data);
-        navigate(`/teachers/${data.data._id}`);
+        if (data.status === 200){
+          navigate(`/teachers/${data.data._id}`)
+          } else { if(data.status != 200){
+            fetch(`/student/login?email=${email}`)
+            .then((res) => res.json())
+            .then((data) => {
+              if(data.status === 200){
+               console.log(data)
+              } 
+            })
+          }
+          }
       });
   };
 

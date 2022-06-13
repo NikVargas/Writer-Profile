@@ -4,6 +4,11 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../Header/Header";
 import QuillText from "./QuillText";
+import TextEditor from "./TextEditor";
+import {Sapling} from "@saplingai/sapling-js/observer"
+
+
+
 
 
 const TextDoc = () => {
@@ -15,10 +20,26 @@ const TextDoc = () => {
   const [correction, setCorrection] =useState()
   const [ offset, setOffset] = useState();
   const [ length, setLength]= useState();
-  
+  const [ trigger, setTrigger] = useState(false);
   const textProduction = (e) =>{
     setMyProduction(e.target.value)
   }
+
+
+
+  useEffect(() => {
+    Sapling.init({
+      key: '6I092JPSKBGPQS6A75H46HGQJ82LQFS7',
+      endpointHostname: 'https://api.sapling.ai',
+      editPathname: '/api/v1/edits',
+      statusBadge: true,
+      autocomplete: false,
+      mode: 'dev',
+    }) 
+    const editor = document.getElementById('editor');
+    Sapling.checkOnce(editor);
+  }, [trigger]); 
+ 
 
   console.log(myProduction)
   console.log(textId);
@@ -29,32 +50,58 @@ const TextDoc = () => {
         if (data.status === 200) {
           console.log(data);
           setText(data.data);
-          // localStorage.setItem("groupId", `${groupId}`)
+          //  localStorage.setItem("groupId", `${groupId}`)
         }
       });
   }, [textId]);
 
 
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    fetch("https://api.languagetool.org/v2/check", {
-      body: new URLSearchParams({
-        text: myProduction,
-        language: "fr",
-        level: "default",
-      }),
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data.matches)
-        setCorrection(data.matches)
-      });
-  };
+const handleSubmit = (e) => {
+  e.preventDefault();
+  fetch("https://api.languagetool.org/v2/check", {
+    body: new URLSearchParams({
+      text: myProduction,
+      language: "fr",
+      level: "default",
+    }),
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data.matches)
+      setCorrection(data.matches)
+    });
+};
+
+
+  // const API_KEY = '6I092JPSKBGPQS6A75H46HGQJ82LQFS7'
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   fetch("https:api.sapling.ai/api/v1/edits", {
+  //     data: JSON.stringify({
+  //       key: API_KEY,
+  //       text: myProduction,
+  //       'session_id': textId,
+  //     }),
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data.matches)
+  //       setCorrection(data.matches)
+  //     });
+  // };
+
+
+
 
   return (
     <>
@@ -62,8 +109,10 @@ const TextDoc = () => {
     <Wrapper>
       <div>{ text ? 
       <h2>{text.title}</h2> : ""}</div>
-      {/* <Form >
+     
+        <Form onSubmit={handleSubmit}>
         <Textarea
+        id="editor"
         type="text"
         placeholder="My text"
         value={myProduction}
@@ -71,7 +120,7 @@ const TextDoc = () => {
         <Container></Container>
         <button>submit</button>
       </Form>
-        {correction ? 
+         {correction ? 
         correction.map((error)=>{
           return(
             <>
@@ -80,16 +129,15 @@ const TextDoc = () => {
             <div>{setLength(error.length)}</div>
             <div></div>
             {}
-      //       {/* <div>{error.replacements}</div> */}
-      {/* //       </>
-      //     )
-      //   }): ""}
-      // <div>{wordToCorrect}</div> */} 
-        {/* <TextEditor/>   */}
+           <div>{error.replacements}</div> 
+           </>
+         )
+      }): ""} 
+         <TextEditor/>   
       
       <Quill>
          <QuillText/>
-        </Quill> 
+        </Quill>   
       </Wrapper>
     </>
   );
@@ -121,5 +169,5 @@ const Form = styled.form`
 `;
 
 const Quill = styled.div`
-margin-top: 20px;
+margin-top: 10px;
 `

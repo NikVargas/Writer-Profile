@@ -4,8 +4,7 @@ import Quill, { Delta, useQuill } from "quill/";
 import "/node_modules/quill/dist/quill.snow.css";
 import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-export Counter from "/Users/nikollevargas/Desktop/WD.Bootcamp/WD_Final-Project/client/src/Components/Texts/Counter.js"
-Quill.register('modules/counter', Counter)
+
 
 
 const QuillText = () => {
@@ -14,6 +13,9 @@ const QuillText = () => {
   const [errorsPosition, setErrorsPosition] = useState();
   const [length, setLength] = useState();
   const [offset, setOffset] = useState();
+
+
+
 
   const toolbarOptions = [
     ["bold", "italic", "underline", "strike"], // toggled buttons
@@ -50,8 +52,8 @@ const QuillText = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setErrorMatches(data.matches);
+        console.log("error matches",data);
+        setErrorMatches(data);
       });
   };
   //display Quill Text editor
@@ -78,8 +80,8 @@ const QuillText = () => {
       console.log("text", text);
       quill.off();
 
-    quill.on("text-change", (Range, oldRange, source) => {
-        quill.formatText(0, 1, {
+    quill.once("text-change", () => {
+        quill.updateContents(0, 1, {
           bold: true,
           color: "rgb(255, 0, 0)",
         });
@@ -89,6 +91,8 @@ const QuillText = () => {
     });
   }, []);
 
+
+
   return (
     <>
       <form onSubmit={sendToCorrect}>
@@ -97,6 +101,7 @@ const QuillText = () => {
         <Button>Correct my text</Button>
         <Button disabled={true}>Send text to my teacher</Button>
       </form>
+
     </>
   );
 };

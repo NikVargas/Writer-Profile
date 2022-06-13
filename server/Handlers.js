@@ -74,15 +74,6 @@ const getTeacherByEmail = async (req, res) => {
           status: 400,
           message: "User don't exist. Please create an account.",
         });
-    student ? res.status(200).json({
-      status: 200,
-      data: isUser,
-      message: "Welcome back!",
-    }) 
-    :  res.status(400).json({
-      status: 400,
-      message: "User don't exist. Please create an account.",
-    });
     client.close();
   } catch (err) {
     console.log(err);
@@ -275,13 +266,13 @@ const getStudentByEmail = async (req, res) => {
     const isUser = await db.collection("Students").findOne({ email });
     isUser
       ? res.status(200).json({
-          status: 301,
+          status: 200,
           data: isUser,
           message: "Welcome back!",
         })
       : res.status(400).json({
           status: 400,
-          message: "Your teacher have to create your account.",
+          message: "Please contact your teacher.",
         });
     client.close();
   } catch (err) {

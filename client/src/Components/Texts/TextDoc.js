@@ -4,10 +4,6 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../Header/Header";
 import QuillText from "./QuillText";
-import TextEditor from "./TextEditor";
-
-const hljs = require('highlight.js/lib/common');
-
 
 
 const TextDoc = () => {
@@ -17,6 +13,8 @@ const TextDoc = () => {
   const [text, setText] = useState();
   const [ myProduction, setMyProduction] = useState("");
   const [correction, setCorrection] =useState()
+  const [ offset, setOffset] = useState();
+  const [ length, setLength]= useState();
   
   const textProduction = (e) =>{
     setMyProduction(e.target.value)
@@ -58,15 +56,13 @@ const TextDoc = () => {
       });
   };
 
-
-
   return (
     <>
     <Header/>
     <Wrapper>
       <div>{ text ? 
       <h2>{text.title}</h2> : ""}</div>
-      <Form onSubmit={handleSubmit}>
+      {/* <Form >
         <Textarea
         type="text"
         placeholder="My text"
@@ -80,15 +76,17 @@ const TextDoc = () => {
           return(
             <>
             <div>{error.message}</div>
-            <div>{error.offset}</div>
-            <div>{error.length}</div>
+            <div>{setOffset(error.offset)}</div>
+            <div>{setLength(error.length)}</div>
+            <div></div>
             {}
-            {/* <div>{error.replacements}</div> */}
-            </>
-          )
-        }): ""}
-      
+      //       {/* <div>{error.replacements}</div> */}
+      {/* //       </>
+      //     )
+      //   }): ""}
+      // <div>{wordToCorrect}</div> */} 
         {/* <TextEditor/>   */}
+      
       <Quill>
          <QuillText/>
         </Quill> 
@@ -123,5 +121,5 @@ const Form = styled.form`
 `;
 
 const Quill = styled.div`
-
+margin-top: 20px;
 `

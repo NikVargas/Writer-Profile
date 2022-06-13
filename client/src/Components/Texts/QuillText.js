@@ -1,37 +1,59 @@
 
+import hljs from "highlight.js";
 import Quill, { Delta, useQuill } from "quill/";
 import "/node_modules/quill/dist/quill.snow.css";
 import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-import quill from "quill/core/quill";
-import { SyntaxCodeBlock as CodeBlock, CodeToken} from '/node_modules/quill/modules/syntax'
-import { Counter } from "./QuillOptions";
-const hljs = require('highlight.js/lib/common');
+export Counter from "/Users/nikollevargas/Desktop/WD.Bootcamp/WD_Final-Project/client/src/Components/Texts/Counter.js"
 Quill.register('modules/counter', Counter)
 
-const toolbarOptions = [
-  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-  ['blockquote', 'code-block'],
-
-  [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-  [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-  [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-  [{ 'direction': 'rtl' }],                         // text direction
-
-  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-
-  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-  [{ 'font': [] }],
-  [{ 'align': [] }],
-
-  ['clean']                                         // remove formatting button
-];
 
 const QuillText = () => {
+  let [text, setText] = useState();
+  const [errorMatches, setErrorMatches] = useState();
+  const [errorsPosition, setErrorsPosition] = useState();
+  const [length, setLength] = useState();
+  const [offset, setOffset] = useState();
 
+  const toolbarOptions = [
+    ["bold", "italic", "underline", "strike"], // toggled buttons
+    ["blockquote", "code-block"],
 
+    [{ header: 1 }, { header: 2 }], // custom button values
+    [{ list: "ordered" }, { list: "bullet" }],
+    [{ script: "sub" }, { script: "super" }], // superscript/subscript
+    [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
+    [{ direction: "rtl" }], // text direction
+
+    [{ size: ["small", false, "large", "huge"] }], // custom dropdown
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+    [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+    [{ font: [] }],
+    [{ align: [] }],
+
+    ["clean"], // remove formatting button
+  ];
+
+  const sendToCorrect = (e) => {
+    e.preventDefault();
+    fetch("https://api.languagetool.org/v2/check", {
+      body: new URLSearchParams({
+        text: text,
+        language: "fr",
+        level: "default",
+      }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setErrorMatches(data.matches);
+      });
+  };
   //display Quill Text editor
   const wrapperRef = useCallback((wrapper) => {
     if (wrapper == null) return;
@@ -40,34 +62,57 @@ const QuillText = () => {
     wrapper.append(editor);
     let quill = new Quill(editor, {
       modules: {
-        syntax: false,
+        syntax: {
+          highlight: (text) => hljs.highlightAuto(text).value,
+        },
+        //adding toolbar to Quill editor
         toolbar: toolbarOptions,
-        counter: {
-          container:'#counter'
-        }
       },
       theme: "snow",
       placeholder: "compose an epic...",
     });
+
+    //Grammar correction with fetch data res API LanguageTool
+    quill.on("text-change", (Delta, oldDelta, source) => {
+      let text = quill.getText();
+      console.log("text", text);
+      quill.off();
+
+    quill.on("text-change", (Range, oldRange, source) => {
+        quill.formatText(0, 1, {
+          bold: true,
+          color: "rgb(255, 0, 0)",
+        });
+      });
+      quill.off();
+      
+    });
   }, []);
 
-
-  return(
+  return (
     <>
-  <Div id="container" ref={wrapperRef}></Div>
-  <div id="counter"></div>
-  </>
+      <form onSubmit={sendToCorrect}>
+        <Div id="container" ref={wrapperRef}></Div>
+        <div id="counter"></div>
+        <Button>Correct my text</Button>
+        <Button disabled={true}>Send text to my teacher</Button>
+      </form>
+    </>
   );
 };
 
 export default QuillText;
 
 const Div = styled.div`
-height: 200px;
-width: 94vw;
-
+  height: 100px;
+  width: 94vw;
 `;
 
+const Button = styled.button`
+  z-index: 3;
+  padding: 10px;
+  margin: 90px 10px 10px 0px;
+`;
 
 
 

@@ -308,7 +308,7 @@ const addText = async (req, res) => {
     };
     await db.collection("Texts").insertOne(newText);
     await db.collection("Teachers").updateOne({ _id: ObjectId(teacherId),}, { $push: { texts: newText._id } });
-    await db.collection("Students").updateMany({ teacher: teacherId },{ $push: { texts: newText._id } });
+    await db.collection("Students").updateMany({ teacher: teacherId },{ $push: { texts: {textId: newText._id, id: ObjectId()} } });
     res.status(200).json({
       status: 200,
       data: newText,

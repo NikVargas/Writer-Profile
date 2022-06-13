@@ -1,12 +1,13 @@
+
 import Quill, { Delta, useQuill } from "quill/";
 import "/node_modules/quill/dist/quill.snow.css";
-import "/node_modules/highlightjs/styles/monokai-sublime.css";
-import hljs from "/node_modules/highlightjs/highlight.pack.js"
 import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import quill from "quill/core/quill";
 import { SyntaxCodeBlock as CodeBlock, CodeToken} from '/node_modules/quill/modules/syntax'
-
+import { Counter } from "./QuillOptions";
+const hljs = require('highlight.js/lib/common');
+Quill.register('modules/counter', Counter)
 
 const toolbarOptions = [
   ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -28,7 +29,6 @@ const toolbarOptions = [
   ['clean']                                         // remove formatting button
 ];
 
-
 const QuillText = () => {
 
 
@@ -38,22 +38,25 @@ const QuillText = () => {
     wrapper.innerHTML = "";
     const editor = document.createElement("div");
     wrapper.append(editor);
-    new Quill(editor, {
+    let quill = new Quill(editor, {
       modules: {
         syntax: false,
         toolbar: toolbarOptions,
+        counter: {
+          container:'#counter'
+        }
       },
       theme: "snow",
+      placeholder: "compose an epic...",
     });
   }, []);
 
 
-  //Changes on the editor
-useEffect
-
   return(
+    <>
   <Div id="container" ref={wrapperRef}></Div>
-  
+  <div id="counter"></div>
+  </>
   );
 };
 
@@ -61,7 +64,7 @@ export default QuillText;
 
 const Div = styled.div`
 height: 200px;
-width: 95vw;
+width: 94vw;
 
 `;
 

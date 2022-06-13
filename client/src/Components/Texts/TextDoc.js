@@ -6,6 +6,7 @@ import Header from "../Header/Header";
 import QuillText from "./QuillText";
 import TextEditor from "./TextEditor";
 
+const hljs = require('highlight.js/lib/common');
 
 
 
@@ -37,9 +38,6 @@ const TextDoc = () => {
 
 
 
-
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch("https://api.languagetool.org/v2/check", {
@@ -60,13 +58,14 @@ const TextDoc = () => {
       });
   };
 
+
+
   return (
     <>
     <Header/>
     <Wrapper>
       <div>{ text ? 
       <h2>{text.title}</h2> : ""}</div>
-      
       <Form onSubmit={handleSubmit}>
         <Textarea
         type="text"
@@ -89,7 +88,7 @@ const TextDoc = () => {
           )
         }): ""}
       
-      {/* <TextEditor/>  */}
+        {/* <TextEditor/>   */}
       <Quill>
          <QuillText/>
         </Quill> 

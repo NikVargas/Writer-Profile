@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Logo from "/Users/nikollevargas/Desktop/WD.Bootcamp/WD_Final-Project/client/src/Components/Logo (2).png";
-
+import Logo from "./Logo (2).png";
+import { FiBookOpen } from "react-icons/fi"
 const Footer = () => {
   return (
     <Wrapper>
@@ -20,15 +20,12 @@ const Wrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
   position: sticky;
-  width: 98%;
+  width: 92vw;
   color: white;
   background: midnightblue;
   display: grid;
   place-items: center;
   padding: 50px;
-  * {
-  box-sizing: border-box;
-}
 `;
 
 const Img = styled.img`

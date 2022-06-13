@@ -15,10 +15,10 @@ button {
     cursor: pointer;
 }
 
-section{
+section {
 background-color: white;
 margin-block-start: 140px;
-width: 100vw;
+width: 95vw;
 min-height: 100vh;
 left: 0;
 right: 0;
@@ -28,6 +28,16 @@ position: relative;
 z-index: 1;
 padding: 2rem;
 }
+
+h1 {
+font-size: 40px;
+color: midnightblue;
+font-size: 30px;
+font-weight: bolder;
+position: sticky;
+
+}
+
 
 `;
 

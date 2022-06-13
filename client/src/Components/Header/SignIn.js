@@ -41,34 +41,31 @@ const SignIn = () => {
   return (
     <Wrapper>
       <Header />
-      <Title>Sign Up</Title>
+     
       <Form onSubmit={handleSubmit}>
-        <label>First Name</label>
-        <input
+        <Title>Sign Up</Title>
+        <Input
         placeholder="First name"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
           type="text"
           required
         />
-        <label>Last name</label>
-        <input
+        <Input
           value={lastName}
           placeholder="Last name"
           onChange={(e) => setLastName(e.target.value)}
           type="text"
           required
         />
-        <label>Email address</label>
-        <input
+        <Input
           value={email}
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
           type="text"
           required
         />
-        <label>Password</label>
-        <input
+        <Input
           value={password}
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
@@ -76,7 +73,7 @@ const SignIn = () => {
           required
         />
         <div>{errorMsg}</div>
-        <button type="submit">Create account</button>
+        <Button type="submit">Create account</Button>
       </Form>
     </Wrapper>
   );
@@ -90,15 +87,80 @@ align-items: center;
 `
 
 const Title = styled.h1`
+color: midnightblue;
+text-align: center;
 padding: 20px;
 `
 
 const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  row-gap: 10px;
-  justify-content: center;
-  align-items: center;
+display: flex;
+gap: 5px;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+top: 20px;
+background: white;
+padding: 3em;
+height: fit-content;
+border-radius: 20px;
+border-left: 1px solid white;
+border-top: 1px solid white;
+backdrop-filter: blur(10px);
+box-shadow: 20px 20px 40px -6px rgba(0,0,0,0.2);
+text-align: center;
+position: relative;
+transition: all 0.2s ease-in-out;
 `;
+
+
+
+const Input = styled.input`
+background: transparent;
+width: 200px;
+padding: 1em;
+margin-bottom: 2em;
+border: none;
+border-left: 1px solid rgba(255,255,255,0.3);
+border-top: 1px solid rgba(255,255,255,0.3);
+backdrop-filter: blur(10px);
+box-shadow: 4px 4px 60px rgba(0,0,0,0.12);
+color: midnightblue;
+font-weight: 500;
+transition: all 0.2s ease-in-out;
+
+:hover {
+background: rgba(255,255,255,0.1);
+box-shadow: 4px 4px 60px 8px rgba(0,0,0,0.12);
+}
+
+:focus {
+background: rgba(255,255,255,0.1);
+box-shadow: 4px 4px 60px 8px rgba(0,0,0,0.12);
+}
+
+:active {
+      text-shadow: none;
+    }
+`
+
+const Button = styled.button`
+width: 120px;
+font-size: 1rem;
+padding: 5px;
+background: rgba(255,255,255,0.15);
+box-shadow: 4px 4px 60px 8px rgba(0,0,0,0.15);
+color: midnightblue;
+  cursor: pointer;
+
+  :hover {
+background: midnightblue;
+color: white;
+box-shadow: 4px 4px 60px 8px rgba(0,0,0,0.12);
+}
+
+:active {
+  background: rgba(255,255,255,0.2);
+}
+`
 
 export default SignIn;

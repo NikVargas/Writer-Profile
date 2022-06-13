@@ -48,20 +48,18 @@ const LogIn = () => {
       <Section>
         <Form onSubmit={handleSubmit}>
           <Title>Log In</Title>
-          <label>E mail</label>
-          <input
+          <Input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             type="text"
             placeholder="email@myemail.com"
-            required></input>
-          <label>Password</label>
-          <input
+            required/>
+          <Input
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type="password"
-            placeholder="Password"></input>
-          <button> LOG IN </button>
+            placeholder="Password"/>
+          <Button> LOG IN </Button>
           <p>Forgot your password?</p>
         </Form>
       </Section>
@@ -71,6 +69,7 @@ const LogIn = () => {
 };
 
 const Wrapper = styled.div`
+
 `;
 
 const HeaderPage = styled.div`
@@ -103,19 +102,83 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center; 
+
 `;
 
 const Form = styled.form`
-  width: 50%;
-  margin-top: -380px;
-  display: flex;
-  flex-direction: column;
-  row-gap: 10px;
-  justify-content: center;
-  align-items: center; 
+display: flex;
+gap: 5px;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+top: -120px;
+background: white;
+padding: 3em;
+height: 320px;
+border-radius: 20px;
+border-left: 1px solid white;
+border-top: 1px solid white;
+backdrop-filter: blur(10px);
+box-shadow: 20px 20px 40px -6px rgba(0,0,0,0.2);
+text-align: center;
+position: relative;
+transition: all 0.2s ease-in-out;
+
 `;
 
 const Title = styled.h1`
-padding: 20px; 
+color: midnightblue;
+text-align: center;
+padding: 20px;
 `
+
+const Input = styled.input`
+background: transparent;
+width: 200px;
+padding: 1em;
+margin-bottom: 2em;
+border: none;
+border-left: 1px solid rgba(255,255,255,0.3);
+border-top: 1px solid rgba(255,255,255,0.3);
+backdrop-filter: blur(10px);
+box-shadow: 4px 4px 60px rgba(0,0,0,0.12);
+color: midnightblue;
+font-weight: 500;
+transition: all 0.2s ease-in-out;
+
+:hover {
+background: rgba(255,255,255,0.1);
+box-shadow: 4px 4px 60px 8px rgba(0,0,0,0.12);
+}
+
+:focus {
+background: rgba(255,255,255,0.1);
+box-shadow: 4px 4px 60px 8px rgba(0,0,0,0.12);
+}
+
+:active {
+      text-shadow: none;
+    }
+`
+
+const Button = styled.button`
+width: 120px;
+font-size: 1rem;
+padding: 5px;
+background: rgba(255,255,255,0.15);
+box-shadow: 4px 4px 60px 8px rgba(0,0,0,0.15);
+color: midnightblue;
+  cursor: pointer;
+
+  :hover {
+background: midnightblue;
+color: white;
+box-shadow: 4px 4px 60px 8px rgba(0,0,0,0.12);
+}
+
+:active {
+  background: rgba(255,255,255,0.2);
+}
+`
+
 export default LogIn;

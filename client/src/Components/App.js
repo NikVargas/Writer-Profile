@@ -11,7 +11,7 @@ import Footer from "./Footer";
 import styled from "styled-components";
 import GroupPage from "./Groups/GroupPage";
 import TextDoc from "./Texts/TextDoc";
-import StudentPage from "./Students/StudentPage"
+import StudentProfile from "./Students/StudentProfile";
 
 
 const App = () => {
@@ -28,8 +28,9 @@ const App = () => {
           <Route path="/login" element={<LogIn />} />
           <Route path="/teachers/:teacherId" element={<TeacherAccount />} />
           <Route path="/groups/:groupId" element={<GroupPage />} />
-          <Route path="/students/:studentId" element={<StudentPage />} />
-          <Route path="/:textId" element={<TextDoc />} />
+          <Route path="/students/:studentId" element={<StudentProfile />} />
+          <Route path="texts/:textId" element={<TextDoc />} />
+          <Route path="students/:stidentId/texts/:textId" element={<TextDoc />} />
         </Routes>
       </BrowserRouter>
       <Footer />

@@ -4,18 +4,16 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 
+
 const Texts = () => {
   const [texts, setTexts] = useState();
-
   const teacher = localStorage.getItem("teacherId");
-  const student = useParams()
-
+  const student = useParams();
   const [addTextForm, setAddTextForm] = useState(false);
-  
+
   const textsForm = () => {
     setAddTextForm(!addTextForm);
   };
-
 
   useEffect(() => {
     fetch(`/texts?teacherId=${teacher}`)
@@ -27,39 +25,24 @@ const Texts = () => {
       });
   }, [teacher]);
 
-
-  // useEffect(() => {
-  //   fetch(`/texts?studentId=${student}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log("student's text", data);
-  //       setTexts(data.data);
-  //       // console.log(d)
-  //     });
-  // }, [student]);
-
-console.log(student.studentId)
-
   return (
     <Wrapper>
       <Button onClick={textsForm}>Add Text </Button>
-      <MyTexts>
-      {texts
-        ? texts.map((text) => {
-            return (
-              <>
-                <Link to={`/${text._id}`}>
-                  <Div>{text.title}</Div>
-                </Link>
-              </>
-            );
-          })
-        : "loading"}
-        </MyTexts><>
-        {student.studentId === 0}
-        
       {addTextForm && <AddText />}
-      </>
+      <MyTexts>
+        {texts
+          ? texts.map((text) => {
+              return (
+                <>
+                  <Link to={`/${text._id}`}>
+                    <Div>{text.title}</Div>
+                  </Link>
+                </>
+              );
+            })
+          : ""}
+      </MyTexts>
+      <></>
     </Wrapper>
   );
 };

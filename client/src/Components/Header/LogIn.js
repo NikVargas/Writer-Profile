@@ -4,44 +4,35 @@ import Logo from "/Users/nikollevargas/Desktop/WD.Bootcamp/WD_Final-Project/clie
 import { useState } from "react";
 
 const LogIn = () => {
+
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     fetch(`/teacher/login?email=${email}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("logIn", data);
-        if (data.status === 200){
-          navigate(`/teachers/${data.data._id}`)
-          } else { if(data.status != 200){
+        if (data.status === 200) {
+          navigate(`/teachers/${data.data._id}`);
+          sessionStorage.setItem('user', 'Teacher')
+        } else {
+          if (data.status != 200) {
+
             fetch(`/student/login?email=${email}`)
-            .then((res) => res.json())
-            .then((data) => {
-              if(data.status === 200){
-               console.log(data)
-              } 
-            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.status === 200) {
+                  navigate(`/students/${data.data._id}`);
+                  sessionStorage.setItem('user', 'Student')
+                }
+              });
           }
-          }
+        }
       });
   };
-
-  // const handleStudentSubmit = (e) => {
-  //   e.preventDefault();
-  //   fetch(`/student/login?email=${email}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log("logIn", data);
-  //       if (data.status === false){
-  //         navigate(`/students/${data.data._id}`);
-  //       }
-  //     });
-  // };
-
-
 
 
   return (

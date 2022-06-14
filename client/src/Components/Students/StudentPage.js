@@ -5,9 +5,11 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import Texts from "../Texts/Texts";
 
+
 const StudentPage = () => {
   let { studentId } = useParams();
   const [student, setStudent] = useState();
+  const userStudent = sessionStorage.getItem('User:', 'StudentUser')
 
   //get specific student's information
   console.log(studentId);
@@ -27,7 +29,7 @@ const StudentPage = () => {
 //get students texts
 
 useEffect(() => {
-  fetch(`/texts/${studentId}`)
+  fetch(`/students/${studentId}`)
     .then((res) => res.json())
     .then((data) => {
       if (data.status === 200) {
@@ -36,24 +38,41 @@ useEffect(() => {
     });
 }, [studentId]);
 
+const [texts, setTexts] = useState();
+const teacher = localStorage.getItem("teacherId");
+const studentPage = useParams()
+
+
+
+
+
+useEffect(() => {
+  fetch(`/texts?studentId=${teacher}`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("texts by teacher", data.data);
+      setTexts(data.data);
+      // console.log(d)
+    });
+}, [teacher]);
+
 
   return (
     <Wrapper>
     <Header />
-      <h1>Student Page</h1>
       {student ? (
         <div>
-          <h2>
+          <H1>
             {student.firstName}<span> {student.lastName}</span>
-          </h2>
+          </H1>
           {/* TODO map results */}
-          <h3>{student.results} results</h3>
+          <H2>{student.results} Results</H2>
           {/* TODO map texts */}
-          <h3>texts</h3>
+          <H2>Texts</H2>
           <Texts/>
         </div>
       ) : (
-        ""
+        ''
       )}
       
     </Wrapper>
@@ -62,7 +81,19 @@ useEffect(() => {
 
 const Wrapper = styled.section`
 
-`
+`;
+
+const H1 = styled.h1`
+margin-bottom: 30px;
+font-size: 40px;
+color: midnightblue;
+`;
+
+const H2 = styled.h2`
+margin-bottom: 30px;
+font-size: 30px;
+color: midnightblue;
+`;
 
 
 

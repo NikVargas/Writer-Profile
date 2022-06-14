@@ -24,23 +24,49 @@ const Students = () => {
   //get teacher's groups
 
   return (
-    <>
+    <Wrapper>
       {students
         ? students.map((student) => {
             return (
               <>
                 <Link to={`/students/${student._id}`}>
-                  <p>
-                    {student.firstName}
-                    <span>{student.lastName}</span>
-                  </p>
+                  <Name>
+                    {student.firstName } { student.lastName}
+                  </Name>
                 </Link>
               </>
             );
           })
         : "Loading"}
-    </>
+    </Wrapper>
   );
 };
+
+
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  margin-top: 25px;
+`;
+
+
+
+const Name = styled.div`
+ display: flex;
+  justify-content: space-evenly;
+  padding: 1em;
+  margin: 1rem;
+  border-radius: 5px;
+  background: #fff;
+  width: 200px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  animation: slideIn 3s;
+  :hover {
+  transform: rotate(-5deg);
+}
+`;
+
 
 export default Students;

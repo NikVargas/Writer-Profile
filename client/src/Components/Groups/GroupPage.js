@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import AddStudent from "../Students/AddStudent";
 import Students from "../Students/Students";
 
+
 const GroupPage = () => {
   let { groupId } = useParams();
   
@@ -31,15 +32,12 @@ const GroupPage = () => {
     <div>
       <Header />
       <Container>
-        
         <> {group ? 
-        <h2>{group.groupName}</h2> 
-        : "Loading"}</>
-        <h3>Students</h3>
+        <H2>{group.groupName}</H2> : ""}</>
+        <H3>Students</H3>
         <Students />
-        <button onClick={addStudentsForm}>Add Student</button>
-        {addStudentForm && <AddStudent />}
-        
+        {addStudentForm && <AddStudent />} 
+        <Button onClick={addStudentsForm}>Add Student</Button>
       </Container>
     </div>
   );
@@ -47,6 +45,37 @@ const GroupPage = () => {
 
 const Container = styled.section`
 
+`;
+
+
+const H2 = styled.h2`
+margin-bottom: 30px;
+font-size: 30px;
+color: midnightblue;
+`;
+
+const H3 = styled.h3`
+margin-bottom: 10px;
+font-size: 25px;
+color: midnightblue;
+
+`;
+
+const Button = styled.button`
+width: 130px;
+border-radius: 2000px;
+font-size: 1rem;
+padding: 10px;
+background: midnightblue;
+margin-top: 10px;
+margin-bottom: 10px;
+box-shadow: 4px 4px 60px 8px rgba(0,0,0,0.15);
+color: white;
+  cursor: pointer;
+  :hover{
+    background: white;
+    color: midnightblue ;
+  }
 `;
 
 export default GroupPage;

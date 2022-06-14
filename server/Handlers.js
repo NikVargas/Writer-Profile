@@ -299,7 +299,7 @@ const addText = async (req, res) => {
     };
     await db.collection("Texts").insertOne(newText);
     await db.collection("Teachers").updateOne({ _id: ObjectId(teacherId),}, { $push: { texts: newText._id } });
-    await db.collection("Students").updateMany({ teacher: teacherId },{ $push: { texts: {textId: newText._id, id: ObjectId()} } });
+    await db.collection("Students").updateMany({ teacher: teacherId },{ $push: { texts: {textId: newText._id, id: ObjectId(), Title: newText.title } } });
     res.status(200).json({
       status: 200,
       data: newText,
@@ -325,7 +325,7 @@ const getTexts = async (req, res) => {
   });
 };
 
-//texts by userId
+
 const getTextById = async (req, res) => {
   try {
     const client = new MongoClient(MONGO_URI, options);
@@ -333,6 +333,9 @@ const getTextById = async (req, res) => {
     const textId = req.params._id;
     const db = client.db("Writer_Profile");
     const text = await db.collection("Texts").findOne({
+      _id: ObjectId(textId),
+    });
+    await db.collection("Texts").findOne({
       _id: ObjectId(textId),
     });
     !text

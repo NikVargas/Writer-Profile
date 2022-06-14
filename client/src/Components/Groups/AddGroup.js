@@ -36,24 +36,45 @@ const AddGroup = () => {
   };
   return (
     <>
-      <div>Form to Add a group </div>
       <Form onSubmit={handleSubmit}>
-        <input
+        <Input
           value={groupName}
           onChange={(e) => setGroupName(e.target.value)}
           type="text"
-          placeholder="Group name"></input>
+          placeholder="Group name"></Input>
 
-        <button type="submit">submit</button>
+        <Button type="submit">submit</Button>
       </Form>
     </>
   );
 };
 
+
+
 const Form = styled.form`
-  width: 400px;
-  height: 50px;
+  width: 300px;
+  height: 100px;
   margin: 10px;
-  border: 1px solid yellowgreen;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const Input = styled.input`
+height: 48px;
+width: 180px;
+border-radius: 30px;
+border: 1px solid #dbdbdb;
+box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.05);
+text-align: center;
+`;
+
+
+const Button = styled.button`
+border-radius: 2000px;
+width: fit-content;
+padding: 5px;
+align-self: center;
+color: midnightblue;
 `;
 export default AddGroup;

@@ -3,6 +3,8 @@ import Header from "./Header/Header";
 import notebook_img from "./notebook_img.png";
 import { Link } from "react-router-dom";
 
+
+
 const Homepage = () => {
   return (
     <Wrapper>

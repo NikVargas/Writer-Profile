@@ -46,21 +46,24 @@ const TeacherAccount = () => {
 const Wrapper = styled.section`
 display: flex;
 flex-direction: column;
+
 `;
 
 const H1 = styled.h1`
 margin-bottom: 30px;
 font-size: 40px;
+color: midnightblue;
 `;
 
 const Div = styled.div`
 margin-top: 30px;
-
+color: midnightblue;
 `;
 
 const H2 = styled.h2`
 margin-bottom: 30px;
 font-size: 30px;
+color: midnightblue;
 `;
 
 export default TeacherAccount;

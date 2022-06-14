@@ -27,7 +27,8 @@ const Groups = () => {
   return (
     <Wrapper>
       <Button onClick={addGroupsForm}>Add group</Button>
-      <MyGroups>
+       {addGroupForm && <AddGroup />}
+       <MyGroups>
       {groups
         ? groups.map((group) => {
             return (
@@ -39,7 +40,6 @@ const Groups = () => {
             );
           })
         : "loading"}
-      {addGroupForm && <AddGroup />}
       </MyGroups>
     </Wrapper>
   );
@@ -56,7 +56,7 @@ const MyGroups = styled.div`
  padding: 10px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  gap:20px;
 `;
 
 

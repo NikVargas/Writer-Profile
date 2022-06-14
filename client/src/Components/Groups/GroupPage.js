@@ -36,8 +36,9 @@ const GroupPage = () => {
         <H2>{group.groupName}</H2> : ""}</>
         <H3>Students</H3>
         <Students />
-        {addStudentForm && <AddStudent />} 
+        
         <Button onClick={addStudentsForm}>Add Student</Button>
+        {addStudentForm && <AddStudent />} 
       </Container>
     </div>
   );

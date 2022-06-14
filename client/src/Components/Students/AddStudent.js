@@ -33,40 +33,73 @@ const AddStudent = () => {
   };
 
   return (
-    <>
+    <Wrapper>
       <Form onSubmit={handleSubmit}>
-        <label>Student First Name</label>
-        <input
+        <Label>Student information</Label>
+        <Input
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
           type="text"
-          placeholder="First Name"></input>
-        <label>Student Last Name</label>
-        <input
+          placeholder="First Name"></Input>
+        <Input
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
           type="text"
-          placeholder="Last Name"></input>
-        <label>Student Email</label>
-        <input
+          placeholder="Last Name"></Input>
+        <Input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           type="text"
-          placeholder="Email"></input>
-        <button>Submit</button>
+          placeholder="Email"></Input>
+        <Button>Submit</Button>
       </Form>
-    </>
+    </Wrapper>
   );
 };
 
 export default AddStudent;
 
-
+const Wrapper = styled.div`
+width: 80vw;
+`;
 
 const Form = styled.form`
-  width: fit-content;
-  height: fit-content;
-  padding: 10px;
-  margin: 20px;
-  border: 1px solid yellowgreen;
+position: sticky;
+  left: 5%;
+  right: 0;
+  padding: 3em;
+  margin: 1rem;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  width: 80%;
+  margin: 10px;
+  display: flex;
+  gap: 20px;
+`;
+
+const Label = styled.label`
+color: midnightblue;
+font-size: 20px;
+font-weight: bold;
+`
+
+const Input = styled.input`
+width: 200px;
+border-radius: 30px;
+border: 1px solid #dbdbdb;
+box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.05);
+text-align: center;
+`;
+
+const Button = styled.button`
+border-radius: 2000px;
+width: 100px;
+padding: 10px;
+align-self: center;
+color: midnightblue;
+:hover{
+  background-color: midnightblue;
+  color: #fff;
+}
 `;

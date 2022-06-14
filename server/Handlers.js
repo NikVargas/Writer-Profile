@@ -56,7 +56,7 @@ const getTeachers = async (req, res) => {
     data: teachers,
   });
 };
-
+//to log in
 const getTeacherByEmail = async (req, res) => {
   try {
     const client = new MongoClient(MONGO_URI, options);

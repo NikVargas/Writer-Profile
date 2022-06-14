@@ -34,7 +34,7 @@ const Texts = () => {
           ? texts.map((text) => {
               return (
                 <>
-                  <Link to={`/${text._id}`}>
+                  <Link to={`/texts/${text._id}`}>
                     <Div>{text.title}</Div>
                   </Link>
                 </>

@@ -19,6 +19,7 @@ const SignIn = () => {
         firstName: firstName,
         lastName: lastName,
         email: email,
+        password: password
       }),
       method: "POST",
       headers: {

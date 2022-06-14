@@ -18,43 +18,13 @@ const TextDoc = () => {
   const [text, setText] = useState();
   const [ myProduction, setMyProduction] = useState("");
   const [correction, setCorrection] =useState()
-  const [ offset, setOffset] = useState();
-  const [ length, setLength]= useState();
+  const [badWords, setBadWords] =useState([])
   const [ trigger, setTrigger] = useState(false);
+  const [ sendToCorrect, setSendToCorrect] = useState(false)
+
   const textProduction = (e) =>{
     setMyProduction(e.target.value)
   }
-
-
-
-  useEffect(() => {
-    Sapling.init({
-      key: '6I092JPSKBGPQS6A75H46HGQJ82LQFS7',
-      endpointHostname: 'https://api.sapling.ai',
-      editPathname: '/api/v1/edits',
-      statusBadge: true,
-      autocomplete: false,
-      mode: 'dev',
-    }) 
-    const editor = document.getElementById('editor');
-    Sapling.checkOnce(editor);
-  }, [trigger]); 
- 
-
-  console.log(myProduction)
-  console.log(textId);
-  useEffect(() => {
-    fetch(`/texts/${textId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status === 200) {
-          console.log(data);
-          setText(data.data);
-          //  localStorage.setItem("groupId", `${groupId}`)
-        }
-      });
-  }, [textId]);
-
 
 
 const handleSubmit = (e) => {
@@ -72,35 +42,23 @@ const handleSubmit = (e) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data.matches)
+   
+      console.log(data)
       setCorrection(data.matches)
+      setBadWords(data.matches?.map((error, i)=>{
+      // console.log( text.slice(error.offset,(error.length + error.offset)))
+      return(
+        { bWord: myProduction.slice(error.offset,(error.length + error.offset)),
+          index: i }
+      )
+  })
+)
+      
     });
 };
 
 
-  // const API_KEY = '6I092JPSKBGPQS6A75H46HGQJ82LQFS7'
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   fetch("https:api.sapling.ai/api/v1/edits", {
-  //     data: JSON.stringify({
-  //       key: API_KEY,
-  //       text: myProduction,
-  //       'session_id': textId,
-  //     }),
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data.matches)
-  //       setCorrection(data.matches)
-  //     });
-  // };
-
-
+  
 
 
   return (
@@ -109,7 +67,6 @@ const handleSubmit = (e) => {
     <Wrapper>
       <div>{ text ? 
       <h2>{text.title}</h2> : ""}</div>
-     
         <Form onSubmit={handleSubmit}>
         <Textarea
         id="editor"
@@ -120,24 +77,21 @@ const handleSubmit = (e) => {
         <Container></Container>
         <button>submit</button>
       </Form>
-         {correction ? 
-        correction.map((error)=>{
-          return(
-            <>
-            <div>{error.message}</div>
-            <div>{setOffset(error.offset)}</div>
-            <div>{setLength(error.length)}</div>
-            <div></div>
-            {}
-           <div>{error.replacements}</div> 
-           </>
-         )
-      }): ""} 
-         <TextEditor/>   
+      <>
+      { myProduction ? myProduction.split(" ").map((word)=>{
+        if(badWords.some(str => str.bWord.includes(word))){
+            return <Wrong>{word} </Wrong>
+        } else {
+        return(
+            <Correct>{word} </Correct>
+        )
+        }
+    })     
+: ""}</>
       
-      <Quill>
+      {/* <Quill>
          <QuillText/>
-        </Quill>   
+        </Quill>    */}
       </Wrapper>
     </>
   );
@@ -164,9 +118,14 @@ margin-top: 10px;
 
 const Form = styled.form`
 
-
-
 `;
+
+const Wrong= styled.span`
+color: red;
+`
+const Correct= styled.span`
+
+`
 
 const Quill = styled.div`
 margin-top: 10px;

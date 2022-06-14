@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { FcApproval } from "react-icons/fc";
+
 
 const AddStudent = () => {
-  let navigate = useNavigate();
   const groupId = useParams().id;
-  // const [teacherId, setTeacherId ]= useState();
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
+  const [ confirmationMssg, setConfirmationMssg] = useState(false);
   const teacherId = localStorage.getItem("teacherId");
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,7 +30,9 @@ const AddStudent = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("addstudent test:", data);
+        if (data.status === 200){
+          setConfirmationMssg(true)
+        };
       });
   };
 
@@ -40,18 +44,20 @@ const AddStudent = () => {
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
           type="text"
-          placeholder="First Name"></Input>
+          placeholder="First Name" required/>
         <Input
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
           type="text"
-          placeholder="Last Name"></Input>
+          placeholder="Last Name" required/>
         <Input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           type="text"
-          placeholder="Email"></Input>
-        <Button>Submit</Button>
+          placeholder="Email" required/>
+        <Button>Submit</Button> 
+        { confirmationMssg === true ? 
+          <FcApproval size={50}/>  : ""}
       </Form>
     </Wrapper>
   );

@@ -1,16 +1,17 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useParams, useNavigate } from "react-router-dom";
-import {FcCheckmark } from "react-icons/fc"
+import { FcApproval } from "react-icons/fc";
+
+
 const AddText = () => {
   let navigate = useNavigate();
   let { teacherId } = useParams();
   const [title, setTitle] = useState();
   const [errorMsg, setErrorMsg] = useState();
-  const userStudent = sessionStorage.getItem("User:")
-  const [ status, setStatus ] = useState();
+  const [ confirmationMssg, setConfirmationMssg] = useState(false);
 
-  console.log(teacherId);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch("/add-text", {
@@ -26,8 +27,7 @@ const AddText = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 200) {
-          // setGroup(data.data)
-          setStatus(data.status)
+          setConfirmationMssg(true)
           data.data._id && navigate(`/texts/${data.data._id}`)
         } else {
           setErrorMsg("Error");
@@ -44,7 +44,8 @@ const AddText = () => {
           type="text"
           placeholder="New text"></Input>
         <Button>Submit</Button>
-        {status === 200 ? <FcCheckmark/> : ""}
+        { confirmationMssg === true ? 
+          <FcApproval size={50}/>  : errorMsg}
       </Form> 
     </>
   );
@@ -57,12 +58,13 @@ const Form = styled.form`
   width: 300px;
   height: 100px;
   margin: 10px;
+  margin-top: 10px;
   display: flex;
-  flex-direction: column;
   gap: 10px;
 `;
 
 const Input = styled.input`
+margin-top: 15px;
 height: 48px;
 width: 180px;
 border-radius: 30px;

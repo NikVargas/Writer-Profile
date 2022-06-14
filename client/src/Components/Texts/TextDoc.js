@@ -1,26 +1,17 @@
 
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useState } from "react";
 import styled from "styled-components";
 import Header from "../Header/Header";
 import QuillText from "./QuillText";
-import TextEditor from "./TextEditor";
-import {Sapling} from "@saplingai/sapling-js/observer"
-
-
-
 
 
 const TextDoc = () => {
 
-
-  let { textId } = useParams();
   const [text, setText] = useState();
   const [ myProduction, setMyProduction] = useState("");
   const [correction, setCorrection] =useState()
   const [badWords, setBadWords] =useState([])
   const [ trigger, setTrigger] = useState(false);
-  const [ sendToCorrect, setSendToCorrect] = useState(false)
 
   const textProduction = (e) =>{
     setMyProduction(e.target.value)
@@ -89,9 +80,9 @@ const handleSubmit = (e) => {
     })     
 : ""}</>
       
-      {/* <Quill>
+       <Quill>
          <QuillText/>
-        </Quill>    */}
+        </Quill> 
       </Wrapper>
     </>
   );

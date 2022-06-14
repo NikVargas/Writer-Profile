@@ -1,10 +1,12 @@
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Logo from "/Users/nikollevargas/Desktop/WD.Bootcamp/WD_Final-Project/client/src/Components/Logo.png";
+
+
 
 const Header = () => {
 
-  
+  //delete all data stored when user log out
   const handleLogOut = ()=>{
     window.localStorage.clear();
     window.location.reload(true);
@@ -14,7 +16,7 @@ const Header = () => {
   return (
     <Wrapper>
       <Link to={`/`}>
-        <Img src={Logo}></Img>
+        <Img src={Logo} ></Img>
       </Link>
       { localStorage.length === 0 ? <Div>
         <Link to={`/store`}>
@@ -23,20 +25,22 @@ const Header = () => {
         <Link to={`/help-center`}>
           <Button>Help center</Button>
         </Link>
-         <Link to={`/blog`}>
+        <Link to={`/blog`}>
           <Button>Blog</Button> 
-         </Link> 
+        </Link> 
         <Link to={`/login`}>
           <Button>Log In</Button>
         </Link>
-      </Div> : <Div>
-         <Link to={`/store`}>
+      </Div> : 
+      //Header nav change if user connected
+      <Div>
+        <Link to={`/store`}>
           <Button>Store</Button>
         </Link> 
         <Link to={`/help-center`}>
           <Button>Help center</Button>
         </Link>
-       <Link to={`/blog`}>
+        <Link to={`/blog`}>
           <Button>Blog</Button> 
         </Link> 
           <Button onClick={handleLogOut}>Log out</Button>
@@ -48,7 +52,7 @@ const Header = () => {
 
 const Wrapper = styled.div`
   width: 98%;
-  height: 60px;
+  height: 80px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -68,8 +72,9 @@ const Wrapper = styled.div`
 `;
 
 const Img = styled.img`
-  width: 180px;
-  padding: 30px;
+  width: 160px;
+  height: 70px;
+  margin-left: 30px;
   margin-top: 14%;
 `;
 

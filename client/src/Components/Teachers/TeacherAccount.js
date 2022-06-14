@@ -32,11 +32,18 @@ const TeacherAccount = () => {
     <>
       <Header />
       <Wrapper>
-          {teacher ? <H1>Hi! {teacher.firstName} </H1> : <p>Hi!</p>}
-        <div><H2>My groups</H2>
-        <Groups/></div>
-        <Div><H2>My texts</H2>
-        <Texts/></Div>
+          {teacher ? 
+          <H1>Hi! {teacher.firstName} </H1> 
+          : 
+          <H1>Hi!</H1>}
+        <div>
+          <H2>My groups</H2>
+        <Groups/>
+        </div>
+        <Div>
+          <H2>My texts</H2>
+        <Texts/>
+        </Div>
       </Wrapper>
     </>
   );
@@ -46,7 +53,7 @@ const TeacherAccount = () => {
 const Wrapper = styled.section`
 display: flex;
 flex-direction: column;
-
+padding: 10px 10px 30px 100px;
 `;
 
 const H1 = styled.h1`

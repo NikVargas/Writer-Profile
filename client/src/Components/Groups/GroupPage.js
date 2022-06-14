@@ -4,12 +4,14 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import AddStudent from "../Students/AddStudent";
 import Students from "../Students/Students";
+import { FcCheckmark } from "react-icons/fc"
 
 
 const GroupPage = () => {
   let { groupId } = useParams();
   
   const [addStudentForm, setAddStudentForm] = useState(false);
+  const [confirmationMssg, setConfirmationMssg] = useState();
 
   const addStudentsForm = () => {
     setAddStudentForm(!addStudentForm);
@@ -24,28 +26,32 @@ const GroupPage = () => {
         if (data.status === 200) {
           setGroup(data.data);
           localStorage.setItem("groupId", `${groupId}`);
+          setConfirmationMssg("FcCheckmark")
         }
       });
   }, [groupId]);
 
+
+
   return (
-    <div>
+    <>
       <Header />
       <Container>
         <> {group ? 
         <H2>{group.groupName}</H2> : ""}</>
         <H3>Students</H3>
         <Students />
-        
         <Button onClick={addStudentsForm}>Add Student</Button>
-        {addStudentForm && <AddStudent />} 
+        {addStudentForm && <AddStudent />}
       </Container>
-    </div>
+    </>
   );
 };
 
-const Container = styled.section`
 
+
+const Container = styled.section`
+padding: 10px 10px 30px 100px;
 `;
 
 

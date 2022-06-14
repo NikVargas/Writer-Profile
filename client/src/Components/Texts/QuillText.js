@@ -10,9 +10,7 @@ import styled from "styled-components";
 const QuillText = () => {
   let [text, setText] = useState();
   const [errorMatches, setErrorMatches] = useState();
-  const [errorsPosition, setErrorsPosition] = useState();
-  const [length, setLength] = useState();
-  const [offset, setOffset] = useState();
+
 
 
 

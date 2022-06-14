@@ -5,26 +5,43 @@ import Logo from "/Users/nikollevargas/Desktop/WD.Bootcamp/WD_Final-Project/clie
 const Header = () => {
 
   
+  const handleLogOut = ()=>{
+    window.localStorage.clear();
+    window.location.reload(true);
+    window.location.replace('/')
+  }
 
   return (
     <Wrapper>
       <Link to={`/`}>
         <Img src={Logo}></Img>
       </Link>
-    <Div>
+      { localStorage.length === 0 ? <Div>
         <Link to={`/store`}>
           <Button>Store</Button>
         </Link>
         <Link to={`/help-center`}>
           <Button>Help center</Button>
         </Link>
-        {/* <Link to={`/blog`}>
-          <Button>Blog</Button> */}
-        {/* </Link> */}
+         <Link to={`/blog`}>
+          <Button>Blog</Button> 
+         </Link> 
         <Link to={`/login`}>
           <Button>Log In</Button>
         </Link>
-      </Div> 
+      </Div> : <Div>
+         <Link to={`/store`}>
+          <Button>Store</Button>
+        </Link> 
+        <Link to={`/help-center`}>
+          <Button>Help center</Button>
+        </Link>
+       <Link to={`/blog`}>
+          <Button>Blog</Button> 
+        </Link> 
+          <Button onClick={handleLogOut}>Log out</Button>
+      </Div>  }
+    
     </Wrapper>
   );
 };

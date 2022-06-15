@@ -3,6 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import Header from "../Header/Header";
 import QuillText from "./QuillText";
+import Corrections from "./Corrections";
 
 
 const TextDoc = () => {
@@ -48,6 +49,14 @@ const handleSubmit = (e) => {
     });
 };
 
+const sendToMyTeacher = (e) =>{
+  e.preventDefault();
+  
+}
+
+
+
+
   return (
     <>
     <Header/>
@@ -58,7 +67,7 @@ const handleSubmit = (e) => {
  <div>
       { correction ? myProduction.split(" ").map((word, i)=>{
         if(badWords.some(str => str.bWord.includes(word))){
-            return <Wrong key={i}>{word} </Wrong>
+            return <Corrections word={word} key={i}/>
         } else {
         return(
             <Correct key={i}>{word} </Correct>
@@ -73,13 +82,10 @@ const handleSubmit = (e) => {
         onChange={textProduction}></Textarea>}</div>
         <Container></Container>
         <Button>Correct my text</Button>
-        
-        <Button disabled={ myProduction.length > 0 ? false : true}>
+        <Button type='button' oncCLick={sendToMyTeacher} disabled={ myProduction.length > 0 ? false : true}>
           Send text to my teacher
           </Button>
       </Form>
-     
-      
        {/* <Quill>
          <QuillText/>
         </Quill>  */}
@@ -108,9 +114,7 @@ margin-top: 10px;
 const Form = styled.form`
 `;
 
-const Wrong= styled.span`
-color: red;
-`
+
 const Correct= styled.span`
 `
 const Button = styled.button`

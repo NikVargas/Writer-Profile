@@ -4,17 +4,23 @@ import styled from "styled-components";
 import Header from "../Header/Header";
 import QuillText from "./QuillText";
 import Corrections from "./Corrections";
-
+import { useNavigate } from "react-router-dom";
 
 const TextDoc = () => {
+
+
+  let studentId = localStorage.getItem("student")
+  let teacherId = localStorage.getItem("teacherId");
 
   const [text, setText] = useState();
   const [ myProduction, setMyProduction] = useState("");
   const [correction, setCorrection] =useState()
   const [badWords, setBadWords] =useState([])
   const [ trigger, setTrigger] = useState(false);
+let navigate = useNavigate()
+  
 
-  const textProduction = (e) =>{
+const textProduction = (e) =>{
     setMyProduction(e.target.value)
   }
 
@@ -34,8 +40,7 @@ const handleSubmit = (e) => {
   })
     .then((res) => res.json())
     .then((data) => {
-   
-      console.log(data)
+      // console.log(data)
       setCorrection(data.matches)
       setBadWords(data.matches?.map((error, i)=>{
       // console.log( text.slice(error.offset,(error.length + error.offset)))
@@ -51,8 +56,29 @@ const handleSubmit = (e) => {
 
 const sendToMyTeacher = (e) =>{
   e.preventDefault();
-  
-}
+  fetch("/add-text", {
+    body: JSON.stringify({
+      studentId: studentId,
+      title: text.title,
+      text: myProduction,
+      textCorrections : correction,
+    }),
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+        console.log(data.status)
+        if (data.status === 200) {
+          navigate(`/teachers/${teacherId}`);
+        } else {
+            navigate(`/students/${studentId}`);
+                } 
+      
+    });
+};
 
 
 
@@ -81,8 +107,8 @@ const sendToMyTeacher = (e) =>{
         value={myProduction}
         onChange={textProduction}></Textarea>}</div>
         <Container></Container>
-        <Button>Correct my text</Button>
-        <Button type='button' oncCLick={sendToMyTeacher} disabled={ myProduction.length > 0 ? false : true}>
+        <Button disabled={ myProduction.length > 0 ? false : true}>Correct my text</Button>
+        <Button type='button' oncCLick={sendToMyTeacher} >
           Send text to my teacher
           </Button>
       </Form>

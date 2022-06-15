@@ -29,11 +29,11 @@ const Students = () => {
   return (
     <Wrapper>
       {students
-        ? students.map((student) => {
+        ? students.map((student, i) => {
             return (
               <>
-                <Link to={`/students/${student._id}`}>
-                  <Name>
+                <Link to={`/students/${student._id}`} key={i}>
+                  <Name key={i}>
                     {student.firstName } { student.lastName}
                   </Name>
                 </Link>

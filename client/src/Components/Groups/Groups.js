@@ -31,11 +31,11 @@ const Groups = () => {
        {addGroupForm && <AddGroup />}
        <MyGroups>
       {groups
-        ? groups.map((group) => {
+        ? groups.map((group, i) => {
             return (
               <>
-                <Link to={`/groups/${group._id}`}>
-                  <Div>{group.groupName}</Div>
+                <Link to={`/groups/${group._id}`} key={i}>
+                  <Div key={i}>{group.groupName}</Div>
                 </Link>
               </>
             );

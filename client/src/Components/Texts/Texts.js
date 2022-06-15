@@ -31,11 +31,11 @@ const Texts = () => {
       {addTextForm && <AddText />}
       <MyTexts>
         {texts
-          ? texts.map((text) => {
+          ? texts.map((text, i) => {
               return (
                 <>
-                  <Link to={`/texts/${text._id}`}>
-                    <Div>{text.title}</Div>
+                  <Link to={`/texts/${text._id}`} key={i}>
+                    <Div key={i}>{text.title}</Div>
                   </Link>
                 </>
               );

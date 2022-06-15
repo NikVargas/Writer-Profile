@@ -58,11 +58,11 @@ return (
     <H2> Results</H2>
     <H2>Texts</H2>
     {studentTexts
-        ? studentTexts.map((text) => {
+        ? studentTexts.map((text, i) => {
             return (
             <>
-                <Link to={`texts/${text._id}`}>
-                <Div>{text.title}</Div>
+                <Link to={`texts/${text._id}`} key={i}>
+                <Div key={i}>{text.title}</Div>
                 </Link>
             </>
             );

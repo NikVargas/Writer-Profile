@@ -42,9 +42,12 @@ const Header = () => {
         <Link to={`/help-center`}>
           <Button>Help center</Button>
         </Link>
+      { teacherId ? 
         <Link to={`/teachers/${teacherId}`}>
           <Button>My profile</Button> 
-        </Link> 
+        </Link> : <Link to={`/students/${studentId}`}>
+          <Button>My profile</Button> 
+        </Link>}
           <Button onClick={handleLogOut}>Log out</Button>
       </Div>  }
     

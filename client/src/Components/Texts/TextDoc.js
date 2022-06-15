@@ -59,6 +59,7 @@ const sendToMyTeacher = (e) =>{
   fetch("/add-text", {
     body: JSON.stringify({
       studentId: studentId,
+      teacherId: teacherId,
       title: text.title,
       text: myProduction,
       textCorrections : correction,
@@ -70,7 +71,7 @@ const sendToMyTeacher = (e) =>{
   })
     .then((res) => res.json())
     .then((data) => {
-        console.log(data.status)
+        // console.log(data.status)
         if (data.status === 200) {
           navigate(`/teachers/${teacherId}`);
         } else {
@@ -108,9 +109,9 @@ const sendToMyTeacher = (e) =>{
         onChange={textProduction}></Textarea>}</div>
         <Container></Container>
         <Button disabled={ myProduction.length > 0 ? false : true}>Correct my text</Button>
-        <Button type='button' oncCLick={sendToMyTeacher} >
-          Send text to my teacher
-          </Button>
+        {/* <Button type='button' oncCLick={sendToMyTeacher} > */}
+          {/* Send text to my teacher
+          </Button> */}
       </Form>
        {/* <Quill>
          <QuillText/>

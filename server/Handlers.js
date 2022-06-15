@@ -297,10 +297,13 @@ const addText = async (req, res) => {
     const newText = {
       title: req.body.title,
       teacherId: req.body.teacherId,
+      studentId: req.body.studentId,
+      text: req.body.text,
+      textCorrections : req.body.correction,
     };
     await db.collection("Texts").insertOne(newText);
     await db.collection("Teachers").updateOne({ _id: ObjectId(teacherId),}, { $push: { texts: newText._id } });
-    await db.collection("Students").updateMany({ teacher: teacherId },{ $push: { texts: {textId: newText._id, id: ObjectId(), Title: newText.title } } });
+    await db.collection("Students").updateMany({ teacher: teacherId },{ $push: { texts: {textId: newText._id, id: ObjectId(), Title: newText.title, textData: newText } } });
     res.status(200).json({
       status: 200,
       data: newText,

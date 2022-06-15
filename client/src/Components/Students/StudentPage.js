@@ -27,7 +27,6 @@ const StudentPage = () => {
   }, [studentId]);
 
 //get students texts
-
 useEffect(() => {
   fetch(`/students/${studentId}`)
     .then((res) => res.json())
@@ -41,9 +40,6 @@ useEffect(() => {
 const [texts, setTexts] = useState();
 const teacher = localStorage.getItem("teacherId");
 const studentPage = useParams()
-
-
-
 
 
 useEffect(() => {

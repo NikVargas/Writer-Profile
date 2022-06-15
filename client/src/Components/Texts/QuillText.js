@@ -5,15 +5,13 @@ import "/node_modules/quill/dist/quill.snow.css";
 import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 
-
+// This is my best version up to day with Quill. 
+// I learn a lot of information about this API. it's so complete. But I did not have the time to do 
+//my project with. For the moment it's in process...
 
 const QuillText = () => {
   let [text, setText] = useState();
   const [errorMatches, setErrorMatches] = useState();
-
-
-
-
 
   const toolbarOptions = [
     ["bold", "italic", "underline", "strike"], // toggled buttons
@@ -37,22 +35,22 @@ const QuillText = () => {
 
   const sendToCorrect = (e) => {
     e.preventDefault();
-    fetch("https://api.languagetool.org/v2/check", {
-      body: new URLSearchParams({
-        text: text,
-        language: "fr",
-        level: "default",
-      }),
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("error matches",data);
-        setErrorMatches(data);
-      });
+    // fetch("https://api.languagetool.org/v2/check", {
+    //   body: new URLSearchParams({
+    //     text: text,
+    //     language: "fr",
+    //     level: "default",
+    //   }),
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/x-www-form-urlencoded",
+    //   },
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log("error matches", data);
+    //     setErrorMatches(data);
+    //   });
   };
   //display Quill Text editor
   const wrapperRef = useCallback((wrapper) => {
@@ -65,7 +63,6 @@ const QuillText = () => {
         syntax: {
           highlight: (text) => hljs.highlightAuto(text).value,
         },
-        //adding toolbar to Quill editor
         toolbar: toolbarOptions,
       },
       theme: "snow",
@@ -78,18 +75,15 @@ const QuillText = () => {
       console.log("text", text);
       quill.off();
 
-    quill.once("text-change", () => {
+      quill.once("text-change", () => {
         quill.updateContents(0, 1, {
           bold: true,
           color: "rgb(255, 0, 0)",
         });
       });
       quill.off();
-      
     });
   }, []);
-
-
 
   return (
     <>
@@ -99,7 +93,6 @@ const QuillText = () => {
         <Button>Correct my text</Button>
         <Button disabled={true}>Send text to my teacher</Button>
       </form>
-
     </>
   );
 };

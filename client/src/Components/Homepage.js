@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Header from "./Header/Header";
 import notebook_img from "./notebook_img.png";
 import { Link } from "react-router-dom";
-
+import Nav from "./Nav";
 
 
 

@@ -30,7 +30,7 @@ const Nav = ()=>{
 const Wrapper = styled.div`
 text-align: center;
 z-index: 3;
-padding: 20px;
+padding-top: 100px;
 `;
 
 const Label = styled.label`

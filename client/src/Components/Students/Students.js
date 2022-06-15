@@ -5,6 +5,9 @@ import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
+
+//display all the teacher's student on the teacher dashboard
+
 const Students = () => {
   let navigate = useNavigate();
   const [students, setStudents] = useState();

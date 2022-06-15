@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 
-
+// get and display all teacher's text on the dashboard for teacher account
 const Texts = () => {
   const [texts, setTexts] = useState();
   const teacher = localStorage.getItem("teacherId");

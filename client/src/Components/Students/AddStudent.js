@@ -5,6 +5,7 @@ import { FcApproval } from "react-icons/fc";
 
 
 const AddStudent = () => {
+
   const groupId = useParams().id;
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
@@ -31,6 +32,7 @@ const AddStudent = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 200){
+          //display a confirmation on submit form 
           setConfirmationMssg(true)
         };
       });

@@ -9,6 +9,7 @@ const HelpCenter = () => {
   
   return (
     <Section>
+      {/* // it will be upgrade... in progress */}
       <Header />
       <h1> Writing Profile Help-Center</h1>
       <Div>

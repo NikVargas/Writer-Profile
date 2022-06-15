@@ -1,5 +1,7 @@
 import { useState, createContext } from "react";
 
+//in the future, this context will be more usefull and render passing data in a more easy way...
+
 export const UserContext = createContext(null);
 
 const UserProvider = ({ children }) => {

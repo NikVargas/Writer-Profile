@@ -4,6 +4,10 @@ import styled from 'styled-components';
 import ReactQuill from 'react-quill'
 import { useState } from 'react';
 
+// this is one of many essaies that I did to do this project.
+//the problem whit this is one, is when the user write somithing, 
+//the quill-react not render the space between words... 
+
 
 const TextEditor = () =>{
 

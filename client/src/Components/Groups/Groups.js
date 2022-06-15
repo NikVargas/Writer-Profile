@@ -26,6 +26,7 @@ const Groups = () => {
 
   return (
     <Wrapper>
+      {/* display form to add groups */}
       <Button onClick={addGroupsForm}>Add group</Button>
        {addGroupForm && <AddGroup />}
        <MyGroups>
@@ -39,6 +40,7 @@ const Groups = () => {
               </>
             );
           })
+          //it will be change for a loadin animation in the future
         : "loading"}
       </MyGroups>
     </Wrapper>

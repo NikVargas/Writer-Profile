@@ -5,11 +5,18 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
+
+
+//only the current student's information...
+//// it will be upgrade... display results, and  add badge system 
+//in progress
 const StudentProfile = () => {
   let { studentId } = useParams();
   const [student, setStudent] = useState();
   const [studentTexts, setStudentTexts] = useState();
   const [teacherId, setTeacherId] = useState();
+
+
 
 useEffect(() => {
 fetch(`/students/${studentId}`)

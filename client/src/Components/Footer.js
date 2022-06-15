@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Logo from "./Logo (2).png";
-import { FiBookOpen } from "react-icons/fi"
+
+
+// eventually, the more information will be display here
 const Footer = () => {
   return (
     <Wrapper>

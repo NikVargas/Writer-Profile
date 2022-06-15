@@ -8,7 +8,7 @@ const Header = () => {
 
   //delete all data stored when user log out
   const handleLogOut = ()=>{
-    window.localStorage.clear();
+    window.localStorage.clear(); //it be change to log in, log out and new account with  Auth0
     window.location.reload(true);
     window.location.replace('/')
   }
@@ -25,24 +25,24 @@ const Header = () => {
         <Link to={`/help-center`}>
           <Button>Help center</Button>
         </Link>
-        <Link to={`/blog`}>
-          <Button>Blog</Button> 
-        </Link> 
+        {/* <Link to={`/blog`}>
+          <Button>Blog</Button> in progress...
+        </Link>  */}
         <Link to={`/login`}>
           <Button>Log In</Button>
         </Link>
       </Div> : 
       //Header nav change if user connected
       <Div>
-        <Link to={`/store`}>
-          <Button>Store</Button>
-        </Link> 
+        {/* <Link to={`/store`}>
+          <Button>Store</Button> in progress...
+        </Link>  */}
         <Link to={`/help-center`}>
           <Button>Help center</Button>
         </Link>
-        <Link to={`/blog`}>
-          <Button>Blog</Button> 
-        </Link> 
+        {/* <Link to={`/blog`}>
+          <Button>Blog</Button>  in progres.. 
+        </Link>  */}
           <Button onClick={handleLogOut}>Log out</Button>
       </Div>  }
     

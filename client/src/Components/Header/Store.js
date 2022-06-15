@@ -1,7 +1,5 @@
 import Header from "./Header";
-
-
-
+// it will be upgrade... in progress
 
 
 const Store = () => {

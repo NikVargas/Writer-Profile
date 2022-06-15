@@ -5,7 +5,8 @@ import { useParams, useNavigate } from "react-router-dom";
 
 const AddGroup = () => {
 
-  let teacherId = useParams().id;
+  let teacherId = useParams();
+  // console.log(teacherId.teacherId)
   const [groupName, setGroupName] = useState();
   const [group, setGroup] = useState();
   const [errorMsg, setErrorMsg] = useState();
@@ -18,7 +19,7 @@ const AddGroup = () => {
     e.preventDefault();
     fetch("/add-group", {
       body: JSON.stringify({
-        teacherId: teacherId,
+        teacherId: teacherId.teacherId,
         groupName: groupName,
       }),
       method: "POST",

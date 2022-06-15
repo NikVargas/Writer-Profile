@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 const AddStudent = () => {
 
-  const groupId = useParams().id;
+  const groupId = useParams();
+  console.log(groupId.groupId)
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
@@ -23,7 +24,7 @@ const AddStudent = () => {
         lastName: lastName,
         email: email,
         password: password,
-        groupId: groupId,
+        groupId: groupId.groupId,
         teacherId: teacherId,
       }),
       method: "POST",
@@ -62,7 +63,7 @@ const AddStudent = () => {
           placeholder="Email" required/>
         <Input
           value={password}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           type="password"
           placeholder="Password" required/>
         <Button>Submit</Button> 

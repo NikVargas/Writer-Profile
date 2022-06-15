@@ -12,7 +12,7 @@ const Groups = () => {
   const addGroupsForm = () => {
     setAddGroupForm(!addGroupForm);
   };
-  //    console.log(teacher)
+    //console.log(teacher)
   //get teacher's groups
   useEffect(() => {
     fetch(`/groups?teacherId=${teacher}`)

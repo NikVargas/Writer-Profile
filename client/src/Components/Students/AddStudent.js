@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { FcApproval } from "react-icons/fc";
-
+import { useNavigate } from "react-router-dom";
 
 const AddStudent = () => {
 
@@ -13,7 +13,7 @@ const AddStudent = () => {
   const [password, setPassword] = useState();
   const [ confirmationMssg, setConfirmationMssg] = useState(false);
   const teacherId = localStorage.getItem("teacherId");
-
+    let navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,7 +35,8 @@ const AddStudent = () => {
       .then((data) => {
         if (data.status === 200){
           //display a confirmation on submit form 
-          setConfirmationMssg(true)
+          setConfirmationMssg(true) 
+          navigate(`/teachers/${teacherId}`)
         };
       });
   };
@@ -62,7 +63,7 @@ const AddStudent = () => {
         <Input
           value={password}
           onChange={(e) => setEmail(e.target.value)}
-          type="text"
+          type="password"
           placeholder="Password" required/>
         <Button>Submit</Button> 
         { confirmationMssg === true ? 

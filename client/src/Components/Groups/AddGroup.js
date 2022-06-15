@@ -6,10 +6,11 @@ import { useParams, useNavigate } from "react-router-dom";
 const AddGroup = () => {
 
   let teacherId = useParams().id;
-  const [ groupName, setGroupName ] = useState();
-  const [ errorMsg, setErrorMsg ] = useState();
-  const [ confirmationMssg, setConfirmationMssg ] = useState(false);
-
+  const [groupName, setGroupName] = useState();
+  const [group, setGroup] = useState();
+  const [errorMsg, setErrorMsg] = useState();
+  const [myTeacherId, setMyTeacherId] = useState();
+  const [ confirmationMssg, setConfirmationMssg] = useState(false);
   const navigate = useNavigate();
 
   // send data group to db
@@ -28,8 +29,10 @@ const AddGroup = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 200) {
-          setConfirmationMssg(true)
-          data.data._id && navigate(`/my-groups/${data.data._id}`);
+          setGroup(data.data);
+          setMyTeacherId(data.data.teacherId);
+          data.data._id && navigate(`/groups/${data.data._id}`);
+          console.log(data);
         } else {
           setErrorMsg("Error");
         }

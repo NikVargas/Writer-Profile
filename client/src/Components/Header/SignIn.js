@@ -42,7 +42,6 @@ const SignIn = () => {
   return (
     <Wrapper>
       <Header />
-     
       <Form onSubmit={handleSubmit}>
         <Title>Sign Up</Title>
         <Input
@@ -94,6 +93,7 @@ padding: 20px;
 `
 
 const Form = styled.form`
+margin-top: -3em;
 display: flex;
 gap: 5px;
 justify-content: center;

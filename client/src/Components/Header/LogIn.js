@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "/Users/nikollevargas/Desktop/WD.Bootcamp/WD_Final-Project/client/src/Components/Logo.png";
+import Logo from "../Writer_Profile IMG/Logo.png";
 import { useState } from "react";
+import Books from "../Writer_Profile IMG/Books.png"
 
 const LogIn = () => {
 
@@ -12,7 +13,7 @@ const LogIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`/teacher/login?email=${email}`)
+    fetch(`/teacher/login?email=${email}&password=${password}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 200) {
@@ -20,17 +21,18 @@ const LogIn = () => {
           sessionStorage.setItem('user', 'Teacher')
         } else {
           if (data.status != 200) {
-
-            fetch(`/student/login?email=${email}`)
+            fetch(`/student/login?email=${email}&password=${password}`)
               .then((res) => res.json())
               .then((data) => {
                 if (data.status === 200) {
                   navigate(`/students/${data.data._id}`);
                   sessionStorage.setItem('user', 'Student')
+                } else {
+                  alert("Bad login")
                 }
               });
           }
-        }
+        } 
       });
   };
 
@@ -42,12 +44,12 @@ const LogIn = () => {
         <Link to={`/`}>
           <Img src={Logo} />
         </Link>
-        <Div>
         <Link to={`/sign-in`}>
           <div>CREATE ACCOUNT</div>
-        </Link></Div>
+        </Link>
       </HeaderPage>
       <Section>
+        <Book src={Books}/>
         <Form onSubmit={handleSubmit}>
           <Title>Log In</Title>
           <Input
@@ -62,7 +64,7 @@ const LogIn = () => {
             type="password"
             placeholder="Password"/>
           <Button> LOG IN </Button>
-          <p>Forgot your password?</p>
+          <P>Forgot your password?</P>
         </Form>
       </Section>
     </Wrapper>
@@ -79,10 +81,11 @@ const HeaderPage = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 100vw; 
+  width: 95vw;
+  height : fit-content;
   position: fixed;
   left: 0;
-  right: 0;
+  right: 2em;
   margin-left: auto;
   margin-right: auto;
   top: 0%;
@@ -95,9 +98,14 @@ const Img = styled.img`
   padding: 30px;
 `;
 
-const Div =styled.div`
-padding: 70px;
-`
+const Book = styled.img`
+  width: 180px;
+  position: relative;
+  top: 16em;
+  right: 10em;
+  z-index: 2;
+`;
+
 
 const Section = styled.section`
 display: flex;
@@ -113,7 +121,7 @@ gap: 5px;
 justify-content: center;
 align-items: center;
 flex-direction: column;
-top: -120px;
+top: -180px;
 background: white;
 padding: 3em;
 height: 320px;
@@ -181,6 +189,10 @@ box-shadow: 4px 4px 60px 8px rgba(0,0,0,0.12);
 :active {
   background: rgba(255,255,255,0.2);
 }
+`
+const P =styled.p`
+font-size: 10px;
+padding: 4px;
 `
 
 export default LogIn;

@@ -55,12 +55,22 @@ const handleSubmit = (e) => {
       <div>{ text ? 
       <h2>{text.title}</h2> : ""}</div>
         <Form onSubmit={handleSubmit}>
-        <Textarea
+ <div>
+      { correction ? myProduction.split(" ").map((word, i)=>{
+        if(badWords.some(str => str.bWord.includes(word))){
+            return <Wrong key={i}>{word} </Wrong>
+        } else {
+        return(
+            <Correct key={i}>{word} </Correct>
+        )
+        }
+    })     
+:   <Textarea
         id="editor"
         type="text"
         placeholder="My text"
         value={myProduction}
-        onChange={textProduction}></Textarea>
+        onChange={textProduction}></Textarea>}</div>
         <Container></Container>
         <Button>Correct my text</Button>
         
@@ -68,17 +78,7 @@ const handleSubmit = (e) => {
           Send text to my teacher
           </Button>
       </Form>
-      <>
-      { myProduction ? myProduction.split(" ").map((word)=>{
-        if(badWords.some(str => str.bWord.includes(word))){
-            return <Wrong>{word} </Wrong>
-        } else {
-        return(
-            <Correct>{word} </Correct>
-        )
-        }
-    })     
-: ""}</>
+     
       
        {/* <Quill>
          <QuillText/>

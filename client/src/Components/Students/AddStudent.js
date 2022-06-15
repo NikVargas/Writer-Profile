@@ -10,6 +10,7 @@ const AddStudent = () => {
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
   const [ confirmationMssg, setConfirmationMssg] = useState(false);
   const teacherId = localStorage.getItem("teacherId");
 
@@ -21,6 +22,7 @@ const AddStudent = () => {
         firstName: firstName,
         lastName: lastName,
         email: email,
+        password: password,
         groupId: groupId,
         teacherId: teacherId,
       }),
@@ -57,6 +59,11 @@ const AddStudent = () => {
           onChange={(e) => setEmail(e.target.value)}
           type="text"
           placeholder="Email" required/>
+        <Input
+          value={password}
+          onChange={(e) => setEmail(e.target.value)}
+          type="text"
+          placeholder="Password" required/>
         <Button>Submit</Button> 
         { confirmationMssg === true ? 
           <FcApproval size={50}/>  : ""}

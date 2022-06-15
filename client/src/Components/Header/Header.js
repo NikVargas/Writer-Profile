@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import Logo from "/Users/nikollevargas/Desktop/WD.Bootcamp/WD_Final-Project/client/src/Components/Logo.png";
+import Logo from "../Writer_Profile IMG/Logo.png";
 
 
 
@@ -12,6 +12,8 @@ const Header = () => {
     window.location.reload(true);
     window.location.replace('/')
   }
+  const teacherId = localStorage.getItem('teacherId');
+  const studentId = localStorage.getItem('student');
 
   return (
     <Wrapper>
@@ -34,15 +36,15 @@ const Header = () => {
       </Div> : 
       //Header nav change if user connected
       <Div>
-        {/* <Link to={`/store`}>
-          <Button>Store</Button> in progress...
-        </Link>  */}
+        <Link to={`/store`}>
+          <Button>Store</Button>
+        </Link> 
         <Link to={`/help-center`}>
           <Button>Help center</Button>
         </Link>
-        {/* <Link to={`/blog`}>
-          <Button>Blog</Button>  in progres.. 
-        </Link>  */}
+        <Link to={`/teachers/${teacherId}`}>
+          <Button>My profile</Button> 
+        </Link> 
           <Button onClick={handleLogOut}>Log out</Button>
       </Div>  }
     

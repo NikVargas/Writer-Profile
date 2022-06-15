@@ -62,8 +62,8 @@ const getTeacherByEmail = async (req, res) => {
     const client = new MongoClient(MONGO_URI, options);
     await client.connect();
     const db = client.db("Writer_Profile");
-    const { email } = req.query;
-    const isUser = await db.collection("Teachers").findOne({ email });
+    const { email, password } = req.query;
+    const isUser = await db.collection("Teachers").findOne({ email, password});
     isUser
       ? res.status(200).json({
           status: 200,
@@ -195,6 +195,7 @@ const addStudent = async (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
+      password: req.body.password,
       group: groupId,
       teacher: teacherId,
       texts: [],
@@ -262,8 +263,8 @@ const getStudentByEmail = async (req, res) => {
     const client = new MongoClient(MONGO_URI, options);
     await client.connect();
     const db = client.db("Writer_Profile");
-    const { email } = req.query;
-    const isUser = await db.collection("Students").findOne({ email });
+    const { email, password } = req.query;
+    const isUser = await db.collection("Students").findOne({ email, password });
     isUser
       ? res.status(200).json({
           status: 200,

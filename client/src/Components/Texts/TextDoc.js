@@ -48,10 +48,6 @@ const handleSubmit = (e) => {
     });
 };
 
-
-  
-
-
   return (
     <>
     <Header/>
@@ -66,7 +62,11 @@ const handleSubmit = (e) => {
         value={myProduction}
         onChange={textProduction}></Textarea>
         <Container></Container>
-        <button>submit</button>
+        <Button>Correct my text</Button>
+        
+        <Button disabled={ myProduction.length > 0 ? false : true}>
+          Send text to my teacher
+          </Button>
       </Form>
       <>
       { myProduction ? myProduction.split(" ").map((word)=>{
@@ -80,9 +80,9 @@ const handleSubmit = (e) => {
     })     
 : ""}</>
       
-       <Quill>
+       {/* <Quill>
          <QuillText/>
-        </Quill> 
+        </Quill>  */}
       </Wrapper>
     </>
   );
@@ -92,11 +92,9 @@ export default TextDoc;
 
 
 const Wrapper = styled.section`
-
 `;
 
 const Container = styled.div`
-
 `;
 
 const Textarea = styled.textarea`
@@ -108,15 +106,18 @@ margin-top: 10px;
 `;
 
 const Form = styled.form`
-
 `;
 
 const Wrong= styled.span`
 color: red;
 `
 const Correct= styled.span`
-
 `
+const Button = styled.button`
+  z-index: 3;
+  padding: 10px;
+  margin: 20px 10px 10px 0px;
+`;
 
 const Quill = styled.div`
 margin-top: 10px;
